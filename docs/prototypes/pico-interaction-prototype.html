@@ -1,0 +1,1580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Pico Interaction Prototype</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Pico Interaction Prototype" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Pico Interaction Prototype&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: var(--border-radius-lg, 12.5px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.progress {
+  display: flex;
+  height: 6px;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: 16px !important;
+  height: 16px !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;pico-prototype&quot;&gt;
+  &lt;style&gt;
+    #pico-prototype { color:#e9f2ff; font-family:-apple-system,BlinkMacSystemFont,&quot;SF Pro Display&quot;,&quot;PingFang SC&quot;,sans-serif; background:transparent; }
+    #pico-prototype * { box-sizing:border-box; }
+    #pico-prototype .review-shell { background:#07090d; border:1px solid #1b2230; border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,.5); min-height:720px; }
+    #pico-prototype .titlebar { height:48px; display:flex; align-items:center; gap:8px; padding:0 18px; background:#0a0d13; border-bottom:1px solid #171d28; }
+    #pico-prototype .traffic { width:11px; height:11px; border-radius:50%; background:#303644; }
+    #pico-prototype .app-title { margin-left:10px; font-size:13px; color:#8e9aae; }
+    #pico-prototype .titlebar-spacer { flex:1; }
+    #pico-prototype .theme-mark { font-size:12px; color:#7f8da3; }
+    #pico-prototype .workspace { display:grid; grid-template-columns:190px minmax(0,1fr); min-height:672px; }
+    #pico-prototype .nav { padding:16px 12px; background:#090c11; border-right:1px solid #171d28; }
+    #pico-prototype .brand { display:flex; align-items:center; gap:10px; padding:6px 8px 18px; }
+    #pico-prototype .brand-icon { width:32px; height:32px; border-radius:10px; display:grid; place-items:center; color:#071019; font-weight:500; background:linear-gradient(145deg,#9ee7ff,#4eb6ff); box-shadow:0 0 24px rgba(76,181,255,.25); }
+    #pico-prototype .brand-copy strong { display:block; font-size:15px; font-weight:500; }
+    #pico-prototype .brand-copy span { display:block; font-size:11px; color:#66748a; margin-top:2px; }
+    #pico-prototype .nav-group { margin-bottom:16px; }
+    #pico-prototype .nav-label { padding:0 9px 6px; font-size:10px; letter-spacing:.08em; color:#566276; text-transform:uppercase; }
+    #pico-prototype .nav button { width:100%; border:0; color:#8995a8; background:transparent; border-radius:9px; padding:8px 10px; text-align:left; display:flex; gap:9px; align-items:center; cursor:pointer; font:inherit; font-size:12px; }
+    #pico-prototype .nav button:hover { background:#101722; color:#d8e8ff; }
+    #pico-prototype .nav button.active { color:#b9e8ff; background:#102233; box-shadow:inset 0 0 0 1px #1b415d; }
+    #pico-prototype .nav button span:first-child { width:16px; text-align:center; color:#59bfff; }
+    #pico-prototype .stage { background:radial-gradient(circle at 80% 10%,rgba(54,143,205,.09),transparent 32%),#07090d; padding:22px; min-width:0; }
+    #pico-prototype .page { display:none; }
+    #pico-prototype .page.active { display:block; }
+    #pico-prototype .page-head { display:flex; align-items:flex-start; gap:16px; margin-bottom:18px; }
+    #pico-prototype .page-head h2 { margin:0 0 5px; font-size:20px; font-weight:500; }
+    #pico-prototype .page-head p { margin:0; font-size:12px; color:#728097; }
+    #pico-prototype .head-actions { margin-left:auto; display:flex; gap:8px; }
+    #pico-prototype .button { border:1px solid #263246; color:#b8c7da; background:#111720; border-radius:9px; padding:7px 11px; font:inherit; font-size:12px; cursor:pointer; }
+    #pico-prototype .button:hover { border-color:#3a6482; color:#dff5ff; }
+    #pico-prototype .button.primary { border-color:#49aee8; color:#061018; background:#79d3ff; }
+    #pico-prototype .segmented { display:flex; padding:3px; gap:2px; border-radius:10px; background:#0b1018; border:1px solid #1b2432; }
+    #pico-prototype .segmented button { border:0; border-radius:7px; background:transparent; color:#728097; padding:6px 9px; font:inherit; font-size:11px; cursor:pointer; }
+    #pico-prototype .segmented button.active { background:#172231; color:#aee7ff; box-shadow:0 2px 8px rgba(0,0,0,.3); }
+    #pico-prototype .mock-desktop { position:relative; height:530px; border-radius:16px; overflow:hidden; background:radial-gradient(circle at 70% 20%,#182536,#0c1119 48%,#090c12); border:1px solid #1d2634; }
+    #pico-prototype .desktop-menu { height:26px; display:flex; align-items:center; padding:0 10px; gap:14px; font-size:9px; color:#8d98a8; background:rgba(8,11,16,.9); border-bottom:1px solid #1a2230; }
+    #pico-prototype .desktop-menu strong { color:#d8e4f4; }
+    #pico-prototype .desktop-menu .right { margin-left:auto; }
+    #pico-prototype .wallpaper-copy { position:absolute; top:80px; left:36px; color:#344156; }
+    #pico-prototype .wallpaper-copy strong { display:block; font-size:26px; font-weight:400; }
+    #pico-prototype .wallpaper-copy span { font-size:11px; }
+    #pico-prototype .clipboard-panel { position:absolute; z-index:3; background:rgba(10,14,20,.97); border:1px solid #263346; box-shadow:0 24px 70px rgba(0,0,0,.64),0 0 0 1px rgba(90,195,255,.03); transition:.24s ease; }
+    #pico-prototype .clipboard-panel.horizontal { left:10px; right:10px; bottom:10px; height:270px; border-radius:18px; }
+    #pico-prototype .clipboard-panel.vertical { right:16px; top:42px; bottom:16px; width:350px; border-radius:18px; }
+    #pico-prototype .clipboard-panel.compact { right:28px; top:82px; width:310px; height:350px; border-radius:18px; }
+    #pico-prototype .panel-toolbar { height:54px; display:flex; align-items:center; gap:8px; padding:9px 12px; border-bottom:1px solid #1a2330; }
+    #pico-prototype .search { flex:1; height:34px; display:flex; align-items:center; gap:8px; padding:0 10px; color:#637188; background:#0c1118; border:1px solid #202b3a; border-radius:10px; }
+    #pico-prototype .search input { width:100%; border:0; outline:0; color:#d8e8fb; background:transparent; font:inherit; font-size:12px; }
+    #pico-prototype .kbd { color:#8290a4; background:#171e29; border:1px solid #2a3545; border-radius:5px; padding:2px 5px; font-size:9px; white-space:nowrap; }
+    #pico-prototype .icon-button { width:33px; height:33px; border-radius:9px; border:1px solid transparent; background:transparent; color:#7d8ca2; cursor:pointer; }
+    #pico-prototype .icon-button:hover,#pico-prototype .icon-button.on { color:#a9e5ff; background:#122131; border-color:#25445c; }
+    #pico-prototype .panel-body { display:grid; grid-template-columns:134px minmax(0,1fr); height:calc(100% - 54px); }
+    #pico-prototype .clipboard-panel.horizontal .panel-body { grid-template-columns:124px minmax(0,1fr); }
+    #pico-prototype .clipboard-panel.compact .panel-body { grid-template-columns:1fr; }
+    #pico-prototype .clipboard-panel.compact .groups-rail { display:none; }
+    #pico-prototype .groups-rail { padding:10px 8px; border-right:1px solid #18212d; overflow:hidden; }
+    #pico-prototype .group-row { display:flex; align-items:center; gap:7px; width:100%; border:0; border-radius:8px; background:transparent; color:#7d899b; padding:7px 8px; font:inherit; font-size:10px; cursor:pointer; }
+    #pico-prototype .group-row.active { color:#b9eaff; background:#102131; }
+    #pico-prototype .group-row .count { margin-left:auto; color:#4f6076; }
+    #pico-prototype .clips-area { padding:10px; min-width:0; overflow:hidden; }
+    #pico-prototype .clips { display:grid; grid-template-columns:repeat(4,minmax(120px,1fr)); gap:8px; }
+    #pico-prototype .clipboard-panel.vertical .clips,#pico-prototype .clipboard-panel.compact .clips { grid-template-columns:1fr; }
+    #pico-prototype .clip { min-width:0; height:148px; padding:11px; border-radius:12px; border:1px solid #202a38; background:#0f141c; color:#93a0b2; cursor:pointer; text-align:left; font:inherit; position:relative; overflow:hidden; }
+    #pico-prototype .clipboard-panel.vertical .clip,#pico-prototype .clipboard-panel.compact .clip { height:68px; }
+    #pico-prototype .clip:hover { transform:translateY(-1px); border-color:#31516a; background:#111a25; }
+    #pico-prototype .clip.selected { border-color:#5cc5ff; background:linear-gradient(145deg,#132534,#101923); box-shadow:0 0 0 1px rgba(92,197,255,.2),0 10px 30px rgba(0,0,0,.22); }
+    #pico-prototype .clip-type { display:flex; align-items:center; gap:6px; color:#68c9f7; font-size:9px; margin-bottom:9px; }
+    #pico-prototype .clip p { margin:0; color:#bbc8d8; font-size:10px; line-height:1.5; }
+    #pico-prototype .clip-meta { position:absolute; left:11px; right:11px; bottom:9px; display:flex; align-items:center; gap:5px; font-size:8px; color:#58677b; }
+    #pico-prototype .clip-meta .num { margin-left:auto; color:#82caed; }
+    #pico-prototype .image-thumb { height:72px; border-radius:8px; background:linear-gradient(135deg,#1b2c3c,#16344d 45%,#6bc8e9); margin-bottom:7px; position:relative; overflow:hidden; }
+    #pico-prototype .image-thumb:after { content:&quot;&quot;; position:absolute; width:80px; height:80px; border-radius:50%; background:#a8e5ff; opacity:.22; right:-16px; top:-23px; }
+    #pico-prototype .toast { position:absolute; z-index:8; left:50%; bottom:300px; transform:translateX(-50%); background:#102537; color:#bfeaff; border:1px solid #2d5f7e; border-radius:10px; padding:8px 12px; font-size:10px; opacity:0; pointer-events:none; transition:.2s ease; }
+    #pico-prototype .toast.show { opacity:1; }
+    #pico-prototype .context-menu { display:none; position:absolute; z-index:10; width:170px; padding:6px; border-radius:12px; background:#111720; border:1px solid #2a3648; box-shadow:0 20px 60px rgba(0,0,0,.55); }
+    #pico-prototype .context-menu.show { display:block; }
+    #pico-prototype .context-menu button { width:100%; border:0; border-radius:7px; background:transparent; color:#aebbcf; padding:7px 9px; text-align:left; font:inherit; font-size:10px; cursor:pointer; }
+    #pico-prototype .context-menu button:hover { background:#163047; color:#d9f2ff; }
+    #pico-prototype .context-menu .danger { color:#ff8f9d; }
+    #pico-prototype .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    #pico-prototype .settings-card { border:1px solid #1d2735; background:#0d1219; border-radius:14px; overflow:hidden; }
+    #pico-prototype .settings-card h3 { margin:0; padding:13px 15px 8px; font-size:12px; font-weight:500; color:#d2deec; }
+    #pico-prototype .setting-row { display:flex; align-items:center; gap:14px; padding:12px 15px; border-top:1px solid #18212c; }
+    #pico-prototype .setting-copy { flex:1; min-width:0; }
+    #pico-prototype .setting-copy strong { display:block; font-size:11px; font-weight:400; color:#bcc9d9; }
+    #pico-prototype .setting-copy span { display:block; font-size:9px; color:#66748a; margin-top:3px; }
+    #pico-prototype .switch { width:34px; height:19px; border:0; border-radius:20px; background:#26303e; padding:2px; cursor:pointer; }
+    #pico-prototype .switch:after { content:&quot;&quot;; display:block; width:15px; height:15px; border-radius:50%; background:#9aa7b7; transition:.18s; }
+    #pico-prototype .switch.on { background:#3b9ed3; }
+    #pico-prototype .switch.on:after { transform:translateX(15px); background:#e7f8ff; }
+    #pico-prototype .select { color:#a9b7c9; background:#121923; border:1px solid #273347; border-radius:8px; padding:6px 8px; font:inherit; font-size:10px; }
+    #pico-prototype .group-board { display:grid; grid-template-columns:210px minmax(0,1fr); gap:12px; }
+    #pico-prototype .group-list,#pico-prototype .group-detail { min-height:490px; background:#0d1219; border:1px solid #1d2735; border-radius:15px; padding:12px; }
+    #pico-prototype .group-tile { display:flex; align-items:center; gap:9px; width:100%; border:0; border-radius:10px; background:transparent; color:#8e9bae; padding:10px; font:inherit; font-size:11px; cursor:pointer; }
+    #pico-prototype .group-tile.active { background:#102334; color:#c8edff; }
+    #pico-prototype .group-color { width:10px; height:10px; border-radius:50%; background:#55c8ff; box-shadow:0 0 10px rgba(85,200,255,.4); }
+    #pico-prototype .group-detail-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+    #pico-prototype .group-detail-head strong { font-weight:500; }
+    #pico-prototype .mini-clips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    #pico-prototype .mini-clip { height:94px; border:1px solid #202b3a; background:#10161f; border-radius:11px; padding:10px; color:#8290a4; font-size:9px; }
+    #pico-prototype .drop-zone { margin-top:10px; padding:16px; border:1px dashed #31516b; border-radius:11px; color:#67bce7; text-align:center; font-size:10px; background:#0d1822; }
+    #pico-prototype .onboarding { max-width:640px; margin:18px auto; min-height:500px; display:grid; place-items:center; border:1px solid #1d2b3d; border-radius:20px; background:radial-gradient(circle at 80% 10%,rgba(79,186,242,.18),transparent 35%),#0b1017; }
+    #pico-prototype .onboard-card { width:min(420px,88%); text-align:center; }
+    #pico-prototype .hero-icon { width:74px; height:74px; margin:0 auto 18px; border-radius:22px; display:grid; place-items:center; font-size:28px; color:#071018; background:linear-gradient(145deg,#b2ebff,#4bb7f2); box-shadow:0 18px 45px rgba(46,164,224,.3); }
+    #pico-prototype .onboard-card h2 { margin:0 0 8px; font-weight:500; }
+    #pico-prototype .onboard-card p { margin:0 auto 20px; max-width:330px; color:#77869b; font-size:11px; line-height:1.6; }
+    #pico-prototype .step-dots { display:flex; justify-content:center; gap:7px; margin-bottom:20px; }
+    #pico-prototype .step-dots i { width:6px; height:6px; border-radius:50%; background:#263142; }
+    #pico-prototype .step-dots i.active { width:18px; border-radius:9px; background:#68cbf9; }
+    #pico-prototype .permission-box { border:1px solid #203246; background:#0e1721; border-radius:13px; padding:14px; text-align:left; margin-bottom:18px; }
+    #pico-prototype .permission-box strong { font-size:11px; font-weight:500; }
+    #pico-prototype .permission-box span { display:block; color:#6f7e93; font-size:9px; margin-top:5px; }
+    #pico-prototype .shortcut-key { display:inline-flex; gap:4px; padding:10px 15px; border:1px solid #2e4358; background:#101a25; border-radius:11px; color:#bdeaff; margin-bottom:18px; font-size:13px; }
+    #pico-prototype .import-list { display:grid; gap:8px; }
+    #pico-prototype .import-row { display:flex; align-items:center; gap:12px; padding:12px; border:1px solid #1d2938; background:#0e141c; border-radius:12px; }
+    #pico-prototype .import-logo { width:32px; height:32px; border-radius:9px; display:grid; place-items:center; background:#162233; color:#6fcfff; font-size:11px; }
+    #pico-prototype .import-row strong { display:block; font-size:11px; font-weight:500; }
+    #pico-prototype .import-row span { display:block; color:#65748a; font-size:9px; margin-top:3px; }
+    #pico-prototype .import-row .button { margin-left:auto; }
+    #pico-prototype .modal-backdrop { display:none; position:absolute; inset:0; z-index:20; place-items:center; background:rgba(2,4,7,.72); backdrop-filter:blur(5px); }
+    #pico-prototype .modal-backdrop.show { display:grid; }
+    #pico-prototype .modal { width:min(390px,88%); padding:18px; border-radius:16px; background:#111720; border:1px solid #2b384a; box-shadow:0 25px 80px rgba(0,0,0,.65); }
+    #pico-prototype .modal h3 { margin:0 0 6px; font-size:14px; font-weight:500; }
+    #pico-prototype .modal p { margin:0 0 15px; color:#728198; font-size:10px; line-height:1.5; }
+    #pico-prototype .modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:16px; }
+    #pico-prototype .field { width:100%; color:#d6e4f5; background:#0b1017; border:1px solid #263449; border-radius:9px; padding:9px 10px; font:inherit; font-size:11px; outline:none; }
+    #pico-prototype .field:focus { border-color:#55bff2; box-shadow:0 0 0 3px rgba(85,191,242,.12); }
+    #pico-prototype .color-picks { display:flex; gap:8px; margin-top:12px; }
+    #pico-prototype .color-picks button { width:22px; height:22px; border-radius:50%; border:2px solid #111720; outline:1px solid #283548; cursor:pointer; }
+    #pico-prototype .color-picks button:nth-child(1) { background:#56c9ff; }
+    #pico-prototype .color-picks button:nth-child(2) { background:#8c8cff; }
+    #pico-prototype .color-picks button:nth-child(3) { background:#4bd1ad; }
+    #pico-prototype .color-picks button:nth-child(4) { background:#ffb45d; }
+    #pico-prototype .color-picks button:nth-child(5) { background:#ff758b; }
+    #pico-prototype .translation-island { display:none; position:absolute; z-index:18; top:38px; left:50%; transform:translateX(-50%); width:310px; color:#d9efff; background:#05080d; border:1px solid #26384b; border-radius:18px; box-shadow:0 18px 60px rgba(0,0,0,.72),0 0 28px rgba(76,181,255,.08); overflow:hidden; }
+    #pico-prototype .translation-island.show { display:block; animation:pico-island-in .24s ease-out; }
+    #pico-prototype .translation-island.expanded { width:430px; }
+    #pico-prototype .island-summary { display:flex; align-items:center; gap:10px; min-height:52px; padding:9px 10px 9px 14px; cursor:pointer; }
+    #pico-prototype .island-orb { width:24px; height:24px; flex:0 0 auto; border-radius:50%; display:grid; place-items:center; color:#061018; background:#72d2ff; box-shadow:0 0 18px rgba(76,190,244,.35); font-size:11px; }
+    #pico-prototype .island-copy { flex:1; min-width:0; }
+    #pico-prototype .island-copy strong { display:block; font-size:10px; font-weight:500; color:#a9dcf7; }
+    #pico-prototype .island-copy span { display:block; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; color:#e0ebf8; }
+    #pico-prototype .island-copy-button { border:1px solid #29445a; color:#9edfff; background:#102131; border-radius:10px; padding:7px 10px; font:inherit; font-size:10px; cursor:pointer; }
+    #pico-prototype .island-copy-button:hover { color:#071018; background:#72d2ff; }
+    #pico-prototype .island-detail { display:none; grid-template-columns:1fr 1fr; gap:10px; padding:0 12px 12px; border-top:1px solid #17212d; }
+    #pico-prototype .translation-island.expanded .island-detail { display:grid; }
+    #pico-prototype .island-text { margin-top:11px; min-height:86px; padding:10px; border-radius:10px; background:#0b1017; color:#9aa8ba; font-size:10px; line-height:1.55; }
+    #pico-prototype .island-text strong { display:block; margin-bottom:6px; color:#5f7188; font-size:9px; font-weight:500; }
+    #pico-prototype .translation-island.error .island-orb { color:#26080e; background:#ff788d; box-shadow:0 0 18px rgba(255,84,112,.25); }
+    #pico-prototype .translation-island.error .island-copy strong { color:#ff93a2; }
+    #pico-prototype .model-status { display:inline-flex; align-items:center; gap:5px; color:#77d9b1; font-size:9px; }
+    #pico-prototype .model-status:before { content:&quot;&quot;; width:6px; height:6px; border-radius:50%; background:#56d6a0; box-shadow:0 0 8px rgba(86,214,160,.45); }
+    #pico-prototype .model-list { display:grid; gap:8px; }
+    #pico-prototype .model-row { display:flex; align-items:center; gap:12px; padding:13px; border:1px solid #1d2938; background:#0e141c; border-radius:12px; }
+    #pico-prototype .model-icon { width:34px; height:34px; border-radius:11px; display:grid; place-items:center; color:#061018; background:linear-gradient(145deg,#a4e9ff,#55bdf3); font-size:12px; }
+    #pico-prototype .model-row strong { display:block; font-size:11px; font-weight:500; }
+    #pico-prototype .model-row span { display:block; color:#65748a; font-size:9px; margin-top:3px; }
+    #pico-prototype .model-row .model-actions { margin-left:auto; display:flex; align-items:center; gap:7px; }
+    #pico-prototype .field-label { display:block; margin:11px 0 5px; color:#718198; font-size:9px; }
+    #pico-prototype .translation-busy { opacity:.66; }
+    #pico-prototype .translation-busy:after { content:&quot;翻译中…&quot;; position:absolute; top:8px; right:8px; padding:3px 6px; border-radius:6px; color:#9edfff; background:#102538; border:1px solid #244b65; font-size:8px; }
+    @keyframes pico-island-in { from { opacity:0; transform:translate(-50%,-10px) scale(.96); } to { opacity:1; transform:translate(-50%,0) scale(1); } }
+    @media (max-width:760px) {
+      #pico-prototype .workspace { grid-template-columns:1fr; }
+      #pico-prototype .nav { display:flex; overflow:auto; border-right:0; border-bottom:1px solid #171d28; padding:8px; }
+      #pico-prototype .brand,.pico-prototype .nav-label { display:none; }
+      #pico-prototype .nav-group { display:flex; margin:0; }
+      #pico-prototype .nav button { white-space:nowrap; width:auto; }
+      #pico-prototype .grid-2,#pico-prototype .group-board { grid-template-columns:1fr; }
+      #pico-prototype .group-list { min-height:auto; }
+      #pico-prototype .mock-desktop { height:590px; }
+      #pico-prototype .clipboard-panel.horizontal { height:320px; }
+      #pico-prototype .clips { grid-template-columns:repeat(2,1fr); }
+      #pico-prototype .mini-clips { grid-template-columns:1fr 1fr; }
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;review-shell&quot;&gt;
+    &lt;div class=&quot;titlebar&quot;&gt;
+      &lt;span class=&quot;traffic&quot;&gt;&lt;/span&gt;&lt;span class=&quot;traffic&quot;&gt;&lt;/span&gt;&lt;span class=&quot;traffic&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;app-title&quot;&gt;Pico · 交互原型审查&lt;/span&gt;&lt;span class=&quot;titlebar-spacer&quot;&gt;&lt;/span&gt;&lt;span class=&quot;theme-mark&quot;&gt;暗黑 / 冰蓝&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;workspace&quot;&gt;
+      &lt;aside class=&quot;nav&quot; aria-label=&quot;原型页面&quot;&gt;
+        &lt;div class=&quot;brand&quot;&gt;&lt;div class=&quot;brand-icon&quot;&gt;P&lt;/div&gt;&lt;div class=&quot;brand-copy&quot;&gt;&lt;strong&gt;Pico&lt;/strong&gt;&lt;span&gt;Clipboard, refined.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;nav-group&quot;&gt;&lt;div class=&quot;nav-label&quot;&gt;核心体验&lt;/div&gt;
+          &lt;button class=&quot;active&quot; data-page=&quot;panel&quot;&gt;&lt;span&gt;⌘&lt;/span&gt;剪贴板面板&lt;/button&gt;
+          &lt;button data-page=&quot;groups&quot;&gt;&lt;span&gt;◫&lt;/span&gt;分组管理&lt;/button&gt;
+          &lt;button data-page=&quot;onboarding&quot;&gt;&lt;span&gt;◇&lt;/span&gt;首次引导&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;nav-group&quot;&gt;&lt;div class=&quot;nav-label&quot;&gt;设置&lt;/div&gt;
+          &lt;button data-page=&quot;general&quot;&gt;&lt;span&gt;⚙&lt;/span&gt;常规与外观&lt;/button&gt;
+          &lt;button data-page=&quot;shortcuts&quot;&gt;&lt;span&gt;⌨&lt;/span&gt;快捷键&lt;/button&gt;
+          &lt;button data-page=&quot;privacy&quot;&gt;&lt;span&gt;◉&lt;/span&gt;隐私与忽略&lt;/button&gt;
+          &lt;button data-page=&quot;models&quot;&gt;&lt;span&gt;✦&lt;/span&gt;AI 模型&lt;/button&gt;
+          &lt;button data-page=&quot;import&quot;&gt;&lt;span&gt;⇣&lt;/span&gt;历史导入&lt;/button&gt;
+          &lt;button data-page=&quot;updates&quot;&gt;&lt;span&gt;↻&lt;/span&gt;更新与关于&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/aside&gt;
+
+      &lt;main class=&quot;stage&quot;&gt;
+        &lt;section class=&quot;page active&quot; data-view=&quot;panel&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;剪贴板面板&lt;/h2&gt;&lt;p&gt;切换布局、选择条目、右键菜单与快速粘贴状态。&lt;/p&gt;&lt;/div&gt;
+            &lt;div class=&quot;head-actions&quot;&gt;&lt;div class=&quot;segmented&quot; id=&quot;layout-switch&quot;&gt;&lt;button class=&quot;active&quot; data-layout=&quot;horizontal&quot;&gt;横向&lt;/button&gt;&lt;button data-layout=&quot;vertical&quot;&gt;纵向&lt;/button&gt;&lt;button data-layout=&quot;compact&quot;&gt;紧凑&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;mock-desktop&quot; id=&quot;desktop&quot;&gt;
+            &lt;div class=&quot;desktop-menu&quot;&gt;&lt;strong&gt;Finder&lt;/strong&gt;&lt;span&gt;文件&lt;/span&gt;&lt;span&gt;编辑&lt;/span&gt;&lt;span class=&quot;right&quot;&gt;Pico ◉　22:41&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;wallpaper-copy&quot;&gt;&lt;strong&gt;Stay in flow.&lt;/strong&gt;&lt;span&gt;⌘ ⇧ V 随时取回复制过的内容&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;toast&quot; id=&quot;toast&quot;&gt;已粘贴到原应用&lt;/div&gt;
+            &lt;div class=&quot;translation-island&quot; id=&quot;translation-island&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;
+              &lt;div class=&quot;island-summary&quot; id=&quot;island-summary&quot;&gt;&lt;span class=&quot;island-orb&quot;&gt;译&lt;/span&gt;&lt;div class=&quot;island-copy&quot;&gt;&lt;strong id=&quot;island-title&quot;&gt;翻译完成 · 英文 → 简体中文&lt;/strong&gt;&lt;span id=&quot;island-result&quot;&gt;设计应该克制，但每一个细节都应有回应。&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;island-copy-button&quot; id=&quot;island-copy-button&quot;&gt;复制&lt;/button&gt;&lt;/div&gt;
+              &lt;div class=&quot;island-detail&quot;&gt;&lt;div class=&quot;island-text&quot;&gt;&lt;strong&gt;原文&lt;/strong&gt;&lt;span id=&quot;island-source&quot;&gt;Design should be restrained, but every detail should respond.&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;island-text&quot;&gt;&lt;strong&gt;译文&lt;/strong&gt;&lt;span id=&quot;island-full-result&quot;&gt;设计应该克制，但每一个细节都应有回应。&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;clipboard-panel horizontal&quot; id=&quot;clipboard-panel&quot;&gt;
+              &lt;div class=&quot;panel-toolbar&quot;&gt;&lt;div class=&quot;search&quot;&gt;&lt;span&gt;⌕&lt;/span&gt;&lt;input id=&quot;clip-search&quot; aria-label=&quot;搜索剪贴板&quot; placeholder=&quot;搜索历史、OCR 或来源应用&quot;&gt;&lt;span class=&quot;kbd&quot;&gt;⌘ F&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;kbd&quot;&gt;← → 切换&lt;/span&gt;&lt;button class=&quot;icon-button&quot; id=&quot;previous-clip&quot; title=&quot;上一条&quot;&gt;←&lt;/button&gt;&lt;button class=&quot;icon-button&quot; id=&quot;next-clip&quot; title=&quot;下一条&quot;&gt;→&lt;/button&gt;&lt;button class=&quot;icon-button&quot; title=&quot;筛选&quot;&gt;≡&lt;/button&gt;&lt;button class=&quot;icon-button&quot; id=&quot;pin-panel&quot; title=&quot;固定面板&quot;&gt;⌖&lt;/button&gt;&lt;button class=&quot;icon-button&quot; title=&quot;设置&quot;&gt;⚙&lt;/button&gt;&lt;/div&gt;
+              &lt;div class=&quot;panel-body&quot;&gt;&lt;div class=&quot;groups-rail&quot;&gt;
+                &lt;button class=&quot;group-row active&quot;&gt;&lt;span&gt;◉&lt;/span&gt;全部&lt;span class=&quot;count&quot;&gt;128&lt;/span&gt;&lt;/button&gt;
+                &lt;button class=&quot;group-row&quot;&gt;&lt;span&gt;★&lt;/span&gt;收藏&lt;span class=&quot;count&quot;&gt;12&lt;/span&gt;&lt;/button&gt;
+                &lt;button class=&quot;group-row&quot;&gt;&lt;span&gt;⌘&lt;/span&gt;开发&lt;span class=&quot;count&quot;&gt;34&lt;/span&gt;&lt;/button&gt;
+                &lt;button class=&quot;group-row&quot;&gt;&lt;span&gt;✦&lt;/span&gt;灵感&lt;span class=&quot;count&quot;&gt;18&lt;/span&gt;&lt;/button&gt;
+                &lt;button class=&quot;group-row&quot;&gt;&lt;span&gt;▣&lt;/span&gt;项目 Pico&lt;span class=&quot;count&quot;&gt;9&lt;/span&gt;&lt;/button&gt;
+              &lt;/div&gt;&lt;div class=&quot;clips-area&quot;&gt;&lt;div class=&quot;clips&quot; id=&quot;clips&quot;&gt;
+                &lt;button class=&quot;clip selected&quot; data-text=&quot;设计应该克制，但每一个细节都应有回应。&quot;&gt;&lt;span class=&quot;clip-type&quot;&gt;● 文本 · Notes&lt;/span&gt;&lt;p&gt;设计应该克制，但每一个细节都应有回应。&lt;/p&gt;&lt;span class=&quot;clip-meta&quot;&gt;刚刚&lt;span class=&quot;num&quot;&gt;⌘1&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;
+                &lt;button class=&quot;clip&quot; data-text=&quot;https://developer.apple.com/design/&quot;&gt;&lt;span class=&quot;clip-type&quot;&gt;◆ 链接 · Safari&lt;/span&gt;&lt;p&gt;Human Interface Guidelines — Apple Design&lt;/p&gt;&lt;span class=&quot;clip-meta&quot;&gt;2 分钟前&lt;span class=&quot;num&quot;&gt;⌘2&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;
+                &lt;button class=&quot;clip&quot; data-text=&quot;Pico image&quot;&gt;&lt;div class=&quot;image-thumb&quot;&gt;&lt;/div&gt;&lt;span class=&quot;clip-meta&quot;&gt;图片 · OCR: interface&lt;span class=&quot;num&quot;&gt;⌘3&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;
+                &lt;button class=&quot;clip&quot; data-text=&quot;struct ClipboardEntry&quot;&gt;&lt;span class=&quot;clip-type&quot;&gt;⌘ Swift · Xcode&lt;/span&gt;&lt;p&gt;struct ClipboardEntry: Identifiable { let id: UUID }&lt;/p&gt;&lt;span class=&quot;clip-meta&quot;&gt;8 分钟前&lt;span class=&quot;num&quot;&gt;⌘4&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;
+              &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;context-menu&quot; id=&quot;context-menu&quot;&gt;&lt;button data-action=&quot;paste&quot;&gt;粘贴&lt;/button&gt;&lt;button data-action=&quot;plain&quot;&gt;粘贴为纯文本&lt;/button&gt;&lt;button data-action=&quot;translate&quot;&gt;✦ 翻译&lt;/button&gt;&lt;button data-action=&quot;favorite&quot;&gt;加入收藏&lt;/button&gt;&lt;button data-action=&quot;group&quot;&gt;添加到分组…&lt;/button&gt;&lt;button data-action=&quot;preview&quot;&gt;快速预览&lt;/button&gt;&lt;button class=&quot;danger&quot; data-action=&quot;delete&quot;&gt;删除&lt;/button&gt;&lt;/div&gt;
+            &lt;div class=&quot;modal-backdrop&quot; id=&quot;preview-modal&quot;&gt;&lt;div class=&quot;modal&quot;&gt;&lt;h3&gt;内容预览&lt;/h3&gt;&lt;p id=&quot;preview-text&quot;&gt;完整内容会在这里显示。图片条目同时展示 OCR 结果。&lt;/p&gt;&lt;div class=&quot;modal-actions&quot;&gt;&lt;button class=&quot;button&quot; data-close&gt;关闭&lt;/button&gt;&lt;button class=&quot;button primary&quot; data-paste&gt;粘贴&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;groups&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;分组管理&lt;/h2&gt;&lt;p&gt;一个条目可进入多个分组，拖放默认添加而不是移动。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;head-actions&quot;&gt;&lt;button class=&quot;button primary&quot; data-open-group&gt;＋ 新建分组&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;group-board&quot;&gt;&lt;div class=&quot;group-list&quot;&gt;&lt;button class=&quot;group-tile active&quot;&gt;&lt;span class=&quot;group-color&quot;&gt;&lt;/span&gt;项目 Pico&lt;/button&gt;&lt;button class=&quot;group-tile&quot;&gt;&lt;span class=&quot;group-color&quot; style=&quot;background:#8c8cff&quot;&gt;&lt;/span&gt;开发资料&lt;/button&gt;&lt;button class=&quot;group-tile&quot;&gt;&lt;span class=&quot;group-color&quot; style=&quot;background:#4bd1ad&quot;&gt;&lt;/span&gt;常用回复&lt;/button&gt;&lt;button class=&quot;group-tile&quot;&gt;&lt;span class=&quot;group-color&quot; style=&quot;background:#ffb45d&quot;&gt;&lt;/span&gt;灵感&lt;/button&gt;&lt;div class=&quot;drop-zone&quot;&gt;拖动调整分组顺序&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;group-detail&quot;&gt;&lt;div class=&quot;group-detail-head&quot;&gt;&lt;span class=&quot;group-color&quot;&gt;&lt;/span&gt;&lt;strong&gt;项目 Pico&lt;/strong&gt;&lt;span class=&quot;kbd&quot;&gt;9 条内容&lt;/span&gt;&lt;span class=&quot;titlebar-spacer&quot;&gt;&lt;/span&gt;&lt;button class=&quot;button&quot;&gt;编辑&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;mini-clips&quot;&gt;&lt;div class=&quot;mini-clip&quot;&gt;暗黑 + 冰蓝的视觉方向&lt;br&gt;&lt;br&gt;文本 · 刚刚&lt;/div&gt;&lt;div class=&quot;mini-clip&quot;&gt;Pico v1 产品文档&lt;br&gt;&lt;br&gt;文件 · 12 分钟前&lt;/div&gt;&lt;div class=&quot;mini-clip&quot;&gt;⌘⇧C 唤起交互&lt;br&gt;&lt;br&gt;代码 · 今天&lt;/div&gt;&lt;div class=&quot;mini-clip&quot;&gt;侧栏分组原型&lt;br&gt;&lt;br&gt;图片 · 今天&lt;/div&gt;&lt;div class=&quot;mini-clip&quot;&gt;发布与更新流程&lt;br&gt;&lt;br&gt;链接 · 昨天&lt;/div&gt;&lt;div class=&quot;mini-clip&quot;&gt;导入映射规则&lt;br&gt;&lt;br&gt;文本 · 昨天&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;drop-zone&quot;&gt;将剪贴板条目拖到这里，加入“项目 Pico”&lt;/div&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;modal-backdrop&quot; id=&quot;group-modal&quot;&gt;&lt;div class=&quot;modal&quot;&gt;&lt;h3&gt;新建分组&lt;/h3&gt;&lt;p&gt;用清晰的名称、图标和颜色区分工作上下文。&lt;/p&gt;&lt;input class=&quot;field&quot; value=&quot;新分组&quot; aria-label=&quot;分组名称&quot;&gt;&lt;div class=&quot;color-picks&quot; aria-label=&quot;分组颜色&quot;&gt;&lt;button aria-label=&quot;冰蓝&quot;&gt;&lt;/button&gt;&lt;button aria-label=&quot;紫色&quot;&gt;&lt;/button&gt;&lt;button aria-label=&quot;绿色&quot;&gt;&lt;/button&gt;&lt;button aria-label=&quot;橙色&quot;&gt;&lt;/button&gt;&lt;button aria-label=&quot;红色&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;modal-actions&quot;&gt;&lt;button class=&quot;button&quot; data-close-group&gt;取消&lt;/button&gt;&lt;button class=&quot;button primary&quot; data-close-group&gt;创建&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;onboarding&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;首次引导&lt;/h2&gt;&lt;p&gt;三步完成快捷键、辅助功能权限和基础偏好。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;head-actions&quot;&gt;&lt;div class=&quot;segmented&quot; id=&quot;onboard-switch&quot;&gt;&lt;button class=&quot;active&quot; data-step=&quot;0&quot;&gt;欢迎&lt;/button&gt;&lt;button data-step=&quot;1&quot;&gt;权限&lt;/button&gt;&lt;button data-step=&quot;2&quot;&gt;偏好&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;onboarding&quot;&gt;&lt;div class=&quot;onboard-card&quot;&gt;&lt;div class=&quot;step-dots&quot;&gt;&lt;i class=&quot;active&quot;&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;&lt;div id=&quot;onboard-content&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;general&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;常规与外观&lt;/h2&gt;&lt;p&gt;保持默认克制，把高频选项放在第一层。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;grid-2&quot;&gt;&lt;div class=&quot;settings-card&quot;&gt;&lt;h3&gt;启动与状态&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;登录时启动 Pico&lt;/strong&gt;&lt;span&gt;在后台安静启动，不主动显示窗口&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;switch on&quot; aria-label=&quot;登录时启动&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;显示菜单栏图标&lt;/strong&gt;&lt;span&gt;快速暂停监听或打开设置&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;switch on&quot; aria-label=&quot;菜单栏图标&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;历史保留&lt;/strong&gt;&lt;span&gt;收藏内容不受期限影响&lt;/span&gt;&lt;/div&gt;&lt;select class=&quot;select&quot;&gt;&lt;option&gt;1 个月&lt;/option&gt;&lt;option&gt;3 个月&lt;/option&gt;&lt;option&gt;永久&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;settings-card&quot;&gt;&lt;h3&gt;面板外观&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;默认布局&lt;/strong&gt;&lt;span&gt;随时可在面板中切换&lt;/span&gt;&lt;/div&gt;&lt;select class=&quot;select&quot;&gt;&lt;option&gt;横向&lt;/option&gt;&lt;option&gt;纵向&lt;/option&gt;&lt;option&gt;紧凑&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;自动预览&lt;/strong&gt;&lt;span&gt;选中条目时显示完整内容&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;switch on&quot; aria-label=&quot;自动预览&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;图片文字识别&lt;/strong&gt;&lt;span&gt;使用 Apple Vision 在本机处理&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;switch on&quot; aria-label=&quot;OCR&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;shortcuts&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;快捷键&lt;/h2&gt;&lt;p&gt;全局只注册面板唤起键，其余按键仅在面板显示时生效。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;settings-card&quot;&gt;&lt;h3&gt;全局&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;打开剪贴板历史&lt;/strong&gt;&lt;span&gt;从任何应用唤起 Pico&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;shortcut-key&quot; style=&quot;margin:0;padding:6px 10px&quot;&gt;⌘ ⇧ V&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;翻译当前剪贴板&lt;/strong&gt;&lt;span&gt;主动调用已配置模型，完成后显示灵动岛&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;shortcut-key&quot; style=&quot;margin:0;padding:6px 10px&quot;&gt;⌥ ⇧ T&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;面板内导航&lt;/strong&gt;&lt;span&gt;左右键切换，Return 粘贴，T 翻译，Esc 关闭&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;kbd&quot;&gt;← →　T　↩　esc&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;纯文本粘贴&lt;/strong&gt;&lt;span&gt;抹除富文本样式后粘贴&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;kbd&quot;&gt;⇧ ↩&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;快速粘贴&lt;/strong&gt;&lt;span&gt;直接选择当前结果中的前九项&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;kbd&quot;&gt;⌘ 1…9&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;models&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;AI 模型&lt;/h2&gt;&lt;p&gt;配置 OpenAI-compatible Chat 接口；模型列表获取失败时可直接填写模型 ID。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;head-actions&quot;&gt;&lt;button class=&quot;button&quot; data-demo-error&gt;查看失败提醒&lt;/button&gt;&lt;button class=&quot;button primary&quot; data-open-model&gt;＋ 添加模型&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;model-list&quot;&gt;&lt;div class=&quot;model-row&quot;&gt;&lt;div class=&quot;model-icon&quot;&gt;AI&lt;/div&gt;&lt;div&gt;&lt;strong&gt;我的翻译模型&lt;/strong&gt;&lt;span&gt;https://api.openai.com/v1 · gpt-4.1-mini&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;model-actions&quot;&gt;&lt;span class=&quot;model-status&quot;&gt;可用&lt;/span&gt;&lt;button class=&quot;button&quot; data-open-model&gt;编辑&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;settings-card&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;翻译行为&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;默认模型&lt;/strong&gt;&lt;span&gt;所有翻译请求均使用此模型&lt;/span&gt;&lt;/div&gt;&lt;select class=&quot;select&quot;&gt;&lt;option&gt;我的翻译模型&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;翻译方向&lt;/strong&gt;&lt;span&gt;中文译为英文，其他语言译为简体中文&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;kbd&quot;&gt;自动判断方向&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;完成提醒&lt;/strong&gt;&lt;span&gt;只在翻译完成或失败后显示灵动岛&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;switch on&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;modal-backdrop&quot; id=&quot;model-modal&quot;&gt;&lt;div class=&quot;modal&quot;&gt;&lt;h3&gt;配置模型&lt;/h3&gt;&lt;p&gt;模型列表接口是可选能力。只要 Chat 接口可用，即可直接保存模型 ID。&lt;/p&gt;&lt;label class=&quot;field-label&quot;&gt;显示名称&lt;/label&gt;&lt;input class=&quot;field&quot; value=&quot;我的翻译模型&quot;&gt;&lt;label class=&quot;field-label&quot;&gt;Base URL&lt;/label&gt;&lt;input class=&quot;field&quot; value=&quot;https://api.openai.com/v1&quot;&gt;&lt;label class=&quot;field-label&quot;&gt;API Key&lt;/label&gt;&lt;input class=&quot;field&quot; type=&quot;password&quot; value=&quot;sk-pico-example&quot;&gt;&lt;label class=&quot;field-label&quot;&gt;模型 ID&lt;/label&gt;&lt;div style=&quot;display:flex;gap:7px&quot;&gt;&lt;input class=&quot;field&quot; value=&quot;gpt-4.1-mini&quot;&gt;&lt;button class=&quot;button&quot; id=&quot;load-models&quot;&gt;获取列表&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;modal-actions&quot;&gt;&lt;button class=&quot;button&quot; id=&quot;test-model&quot;&gt;测试 Chat&lt;/button&gt;&lt;button class=&quot;button&quot; data-close-model&gt;取消&lt;/button&gt;&lt;button class=&quot;button primary&quot; data-close-model&gt;保存&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;privacy&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;隐私与忽略&lt;/h2&gt;&lt;p&gt;所有内容仅保存在这台 Mac；敏感应用可完全跳过。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;head-actions&quot;&gt;&lt;button class=&quot;button primary&quot;&gt;＋ 添加应用&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;grid-2&quot;&gt;&lt;div class=&quot;settings-card&quot;&gt;&lt;h3&gt;监听控制&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;剪贴板监听&lt;/strong&gt;&lt;span&gt;暂停期间的内容不会在恢复后补录&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;switch on&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;辅助功能权限&lt;/strong&gt;&lt;span&gt;已授权，可在其他应用中模拟粘贴&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot;&gt;打开系统设置&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;settings-card&quot;&gt;&lt;h3&gt;已忽略的应用&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;import-logo&quot;&gt;1P&lt;/div&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;1Password&lt;/strong&gt;&lt;span&gt;com.1password.1password&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot;&gt;移除&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;import-logo&quot;&gt;BW&lt;/div&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;Bitwarden&lt;/strong&gt;&lt;span&gt;com.bitwarden.desktop&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot;&gt;移除&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;import&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;历史导入&lt;/h2&gt;&lt;p&gt;先解析预览，再由用户确认；失败不会写入任何数据。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;import-list&quot;&gt;&lt;div class=&quot;import-row&quot;&gt;&lt;div class=&quot;import-logo&quot;&gt;P&lt;/div&gt;&lt;div&gt;&lt;strong&gt;Paste&lt;/strong&gt;&lt;span&gt;选择 Paste SQLite 数据库&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot; data-import=&quot;Paste&quot;&gt;选择文件…&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;import-row&quot;&gt;&lt;div class=&quot;import-logo&quot;&gt;PN&lt;/div&gt;&lt;div&gt;&lt;strong&gt;PasteNow&lt;/strong&gt;&lt;span&gt;选择 PasteNow 导出的 JSON 文件&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot; data-import=&quot;PasteNow&quot;&gt;选择文件…&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;import-row&quot;&gt;&lt;div class=&quot;import-logo&quot;&gt;M&lt;/div&gt;&lt;div&gt;&lt;strong&gt;Maccy&lt;/strong&gt;&lt;span&gt;选择 Maccy SQLite 数据库&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot; data-import=&quot;Maccy&quot;&gt;选择文件…&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;import-row&quot;&gt;&lt;div class=&quot;import-logo&quot;&gt;iC&lt;/div&gt;&lt;div&gt;&lt;strong&gt;iCopy&lt;/strong&gt;&lt;span&gt;选择 iCopy SQLite 数据库&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot; data-import=&quot;iCopy&quot;&gt;选择文件…&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;import-row&quot;&gt;&lt;div class=&quot;import-logo&quot;&gt;E&lt;/div&gt;&lt;div&gt;&lt;strong&gt;EcoPaste&lt;/strong&gt;&lt;span&gt;选择 EcoPaste SQLite 数据库&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot; data-import=&quot;EcoPaste&quot;&gt;选择文件…&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;modal-backdrop&quot; id=&quot;import-modal&quot;&gt;&lt;div class=&quot;modal&quot;&gt;&lt;h3 id=&quot;import-title&quot;&gt;导入预览&lt;/h3&gt;&lt;p&gt;已解析 2,486 条记录，其中 83 条与 Pico 中的现有内容重复。确认后将导入 2,403 条，原有数据不会被覆盖。&lt;/p&gt;&lt;div class=&quot;settings-card&quot;&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;文本与链接&lt;/strong&gt;&lt;span&gt;2,116 条&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;图片与文件&lt;/strong&gt;&lt;span&gt;287 条&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;modal-actions&quot;&gt;&lt;button class=&quot;button&quot; data-close-import&gt;取消&lt;/button&gt;&lt;button class=&quot;button primary&quot; data-close-import&gt;开始导入&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class=&quot;page&quot; data-view=&quot;updates&quot;&gt;
+          &lt;div class=&quot;page-head&quot;&gt;&lt;div&gt;&lt;h2&gt;更新与关于&lt;/h2&gt;&lt;p&gt;签名、公证、可验证的发布体验。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;grid-2&quot;&gt;&lt;div class=&quot;settings-card&quot;&gt;&lt;h3&gt;软件更新&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;自动检查更新&lt;/strong&gt;&lt;span&gt;通过 Sparkle 获取已签名的新版本&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;switch on&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;当前版本&lt;/strong&gt;&lt;span&gt;Pico 1.0.0 · 已是最新版本&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot;&gt;检查更新&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;settings-card&quot;&gt;&lt;h3&gt;关于 Pico&lt;/h3&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;hero-icon&quot; style=&quot;width:44px;height:44px;border-radius:13px;margin:0;font-size:17px&quot;&gt;P&lt;/div&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;Pico&lt;/strong&gt;&lt;span&gt;小巧、快速的 Mac 剪贴板工具&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;setting-row&quot;&gt;&lt;div class=&quot;setting-copy&quot;&gt;&lt;strong&gt;本地数据&lt;/strong&gt;&lt;span&gt;打开 Pico 数据目录或清理非收藏历史&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button&quot;&gt;管理数据&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    (() =&gt; {
+      const root = document.getElementById(&#x27;pico-prototype&#x27;);
+      const pages = root.querySelectorAll(&#x27;.page&#x27;);
+      root.querySelectorAll(&#x27;.nav button[data-page]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; {
+        root.querySelectorAll(&#x27;.nav button[data-page]&#x27;).forEach(item =&gt; item.classList.remove(&#x27;active&#x27;));
+        button.classList.add(&#x27;active&#x27;);
+        pages.forEach(page =&gt; page.classList.toggle(&#x27;active&#x27;, page.dataset.view === button.dataset.page));
+      }));
+
+      const panel = root.querySelector(&#x27;#clipboard-panel&#x27;);
+      root.querySelectorAll(&#x27;#layout-switch button&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; {
+        root.querySelectorAll(&#x27;#layout-switch button&#x27;).forEach(item =&gt; item.classList.remove(&#x27;active&#x27;));
+        button.classList.add(&#x27;active&#x27;);
+        panel.className = &#x27;clipboard-panel &#x27; + button.dataset.layout;
+      }));
+
+      const search = root.querySelector(&#x27;#clip-search&#x27;);
+      search.addEventListener(&#x27;input&#x27;, () =&gt; {
+        const query = search.value.trim().toLowerCase();
+        root.querySelectorAll(&#x27;.clip&#x27;).forEach(clip =&gt; { clip.style.display = clip.innerText.toLowerCase().includes(query) ? &#x27;&#x27; : &#x27;none&#x27;; });
+      });
+
+      let selectedClip = root.querySelector(&#x27;.clip.selected&#x27;);
+      const menu = root.querySelector(&#x27;#context-menu&#x27;);
+      root.querySelectorAll(&#x27;.clip&#x27;).forEach(clip =&gt; {
+        clip.addEventListener(&#x27;click&#x27;, () =&gt; {
+          root.querySelectorAll(&#x27;.clip&#x27;).forEach(item =&gt; item.classList.remove(&#x27;selected&#x27;));
+          clip.classList.add(&#x27;selected&#x27;); selectedClip = clip;
+        });
+        clip.addEventListener(&#x27;contextmenu&#x27;, event =&gt; {
+          event.preventDefault(); selectedClip = clip;
+          root.querySelectorAll(&#x27;.clip&#x27;).forEach(item =&gt; item.classList.toggle(&#x27;selected&#x27;, item === clip));
+          const desktopRect = root.querySelector(&#x27;#desktop&#x27;).getBoundingClientRect();
+          menu.style.left = Math.min(event.clientX - desktopRect.left, desktopRect.width - 180) + &#x27;px&#x27;;
+          menu.style.top = Math.min(event.clientY - desktopRect.top, desktopRect.height - 220) + &#x27;px&#x27;;
+          menu.classList.add(&#x27;show&#x27;);
+        });
+      });
+      const visibleClips = () =&gt; Array.from(root.querySelectorAll(&#x27;.clip&#x27;)).filter(clip =&gt; clip.style.display !== &#x27;none&#x27;);
+      const moveSelection = direction =&gt; {
+        const clips = visibleClips();
+        if (!clips.length) return;
+        const currentIndex = Math.max(0, clips.indexOf(selectedClip));
+        const nextIndex = (currentIndex + direction + clips.length) % clips.length;
+        clips.forEach((clip, index) =&gt; clip.classList.toggle(&#x27;selected&#x27;, index === nextIndex));
+        selectedClip = clips[nextIndex];
+      };
+      root.querySelector(&#x27;#previous-clip&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; moveSelection(-1));
+      root.querySelector(&#x27;#next-clip&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; moveSelection(1));
+      root.addEventListener(&#x27;keydown&#x27;, event =&gt; {
+        if (!root.querySelector(&#x27;[data-view=&quot;panel&quot;]&#x27;).classList.contains(&#x27;active&#x27;)) return;
+        if (event.target === search &amp;&amp; event.key !== &#x27;Escape&#x27;) return;
+        if (event.key === &#x27;ArrowLeft&#x27;) { event.preventDefault(); moveSelection(-1); }
+        if (event.key === &#x27;ArrowRight&#x27;) { event.preventDefault(); moveSelection(1); }
+        if (event.key.toLowerCase() === &#x27;t&#x27;) { event.preventDefault(); translateSelectedClip(); }
+        if (event.key === &#x27;Enter&#x27;) { event.preventDefault(); showToast(event.shiftKey ? &#x27;已粘贴为纯文本&#x27; : &#x27;已粘贴到原应用&#x27;); }
+        if (event.key === &#x27;Escape&#x27;) { event.preventDefault(); menu.classList.remove(&#x27;show&#x27;); preview.classList.remove(&#x27;show&#x27;); showToast(&#x27;面板已关闭 · 焦点返回原应用&#x27;); }
+      });
+      root.querySelector(&#x27;#desktop&#x27;).addEventListener(&#x27;click&#x27;, event =&gt; { if (!menu.contains(event.target)) menu.classList.remove(&#x27;show&#x27;); });
+      root.querySelector(&#x27;#pin-panel&#x27;).addEventListener(&#x27;click&#x27;, event =&gt; event.currentTarget.classList.toggle(&#x27;on&#x27;));
+
+      const toast = root.querySelector(&#x27;#toast&#x27;);
+      const showToast = text =&gt; { toast.textContent = text; toast.classList.add(&#x27;show&#x27;); setTimeout(() =&gt; toast.classList.remove(&#x27;show&#x27;), 1200); };
+      const island = root.querySelector(&#x27;#translation-island&#x27;);
+      const islandTitle = root.querySelector(&#x27;#island-title&#x27;);
+      const islandResult = root.querySelector(&#x27;#island-result&#x27;);
+      const islandSource = root.querySelector(&#x27;#island-source&#x27;);
+      const islandFullResult = root.querySelector(&#x27;#island-full-result&#x27;);
+      function translateSelectedClip() {
+        if (!selectedClip || selectedClip.style.display === &#x27;none&#x27;) return;
+        selectedClip.classList.add(&#x27;translation-busy&#x27;);
+        menu.classList.remove(&#x27;show&#x27;);
+        island.classList.remove(&#x27;show&#x27;, &#x27;expanded&#x27;, &#x27;error&#x27;);
+        root.querySelector(&#x27;#island-copy-button&#x27;).textContent = &#x27;复制&#x27;;
+        setTimeout(() =&gt; {
+          selectedClip.classList.remove(&#x27;translation-busy&#x27;);
+          const source = selectedClip.dataset.text || selectedClip.innerText.trim();
+          const hasChinese = /[\u3400-\u9fff]/.test(source);
+          const result = hasChinese ? &#x27;Design should be restrained, but every detail should respond.&#x27; : &#x27;设计应该克制，但每一个细节都应有回应。&#x27;;
+          islandTitle.textContent = hasChinese ? &#x27;翻译完成 · 中文 → 英文&#x27; : &#x27;翻译完成 · 英文 → 简体中文&#x27;;
+          islandResult.textContent = result;
+          islandSource.textContent = source;
+          islandFullResult.textContent = result;
+          island.classList.add(&#x27;show&#x27;);
+        }, 850);
+      }
+      root.querySelector(&#x27;#island-summary&#x27;).addEventListener(&#x27;click&#x27;, event =&gt; { if (!event.target.closest(&#x27;#island-copy-button&#x27;)) island.classList.toggle(&#x27;expanded&#x27;); });
+      root.querySelector(&#x27;#island-copy-button&#x27;).addEventListener(&#x27;click&#x27;, event =&gt; {
+        event.stopPropagation();
+        if (island.classList.contains(&#x27;error&#x27;)) { translateSelectedClip(); return; }
+        event.currentTarget.textContent = &#x27;已复制&#x27;;
+        setTimeout(() =&gt; { island.classList.remove(&#x27;show&#x27;, &#x27;expanded&#x27;); event.currentTarget.textContent = &#x27;复制&#x27;; }, 900);
+      });
+      const preview = root.querySelector(&#x27;#preview-modal&#x27;);
+      menu.querySelectorAll(&#x27;button&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; {
+        menu.classList.remove(&#x27;show&#x27;);
+        if (button.dataset.action === &#x27;preview&#x27;) { root.querySelector(&#x27;#preview-text&#x27;).textContent = selectedClip.dataset.text; preview.classList.add(&#x27;show&#x27;); }
+        else if (button.dataset.action === &#x27;delete&#x27;) { selectedClip.style.display = &#x27;none&#x27;; showToast(&#x27;已删除条目&#x27;); }
+        else if (button.dataset.action === &#x27;translate&#x27;) { translateSelectedClip(); }
+        else if (button.dataset.action === &#x27;favorite&#x27;) { showToast(&#x27;已加入收藏&#x27;); }
+        else if (button.dataset.action === &#x27;group&#x27;) { showToast(&#x27;已打开分组选择&#x27;); }
+        else { showToast(button.dataset.action === &#x27;plain&#x27; ? &#x27;已粘贴为纯文本&#x27; : &#x27;已粘贴到原应用&#x27;); }
+      }));
+      root.querySelectorAll(&#x27;[data-close]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; preview.classList.remove(&#x27;show&#x27;)));
+      root.querySelectorAll(&#x27;[data-paste]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; { preview.classList.remove(&#x27;show&#x27;); showToast(&#x27;已粘贴到原应用&#x27;); }));
+
+      root.querySelectorAll(&#x27;.switch&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; button.classList.toggle(&#x27;on&#x27;)));
+      const groupModal = root.querySelector(&#x27;#group-modal&#x27;);
+      root.querySelector(&#x27;[data-open-group]&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; groupModal.classList.add(&#x27;show&#x27;));
+      root.querySelectorAll(&#x27;[data-close-group]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; groupModal.classList.remove(&#x27;show&#x27;)));
+
+      const onboardContent = root.querySelector(&#x27;#onboard-content&#x27;);
+      const onboardViews = [
+        &#x27;&lt;div class=&quot;hero-icon&quot;&gt;P&lt;/div&gt;&lt;h2&gt;欢迎使用 Pico&lt;/h2&gt;&lt;p&gt;让复制过的内容在需要时立即出现，同时始终留在你的 Mac 上。&lt;/p&gt;&lt;div class=&quot;shortcut-key&quot;&gt;⌘　⇧　V&lt;/div&gt;&lt;br&gt;&lt;button class=&quot;button primary&quot;&gt;继续&lt;/button&gt;&#x27;,
+        &#x27;&lt;div class=&quot;hero-icon&quot;&gt;⌘&lt;/div&gt;&lt;h2&gt;允许快速粘贴&lt;/h2&gt;&lt;p&gt;Pico 只在你选择历史条目时模拟一次 Command–V，不会读取键盘输入。&lt;/p&gt;&lt;div class=&quot;permission-box&quot;&gt;&lt;strong&gt;辅助功能权限&lt;/strong&gt;&lt;span&gt;尚未授权 · 前往系统设置开启&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button primary&quot;&gt;打开系统设置&lt;/button&gt;&#x27;,
+        &#x27;&lt;div class=&quot;hero-icon&quot;&gt;✓&lt;/div&gt;&lt;h2&gt;保持 Pico 随时可用&lt;/h2&gt;&lt;p&gt;建议登录时启动，并保留一个月历史。收藏内容不会被自动清理。&lt;/p&gt;&lt;div class=&quot;permission-box&quot;&gt;&lt;strong&gt;登录时启动　　开启&lt;/strong&gt;&lt;span&gt;历史保留期限　　1 个月&lt;/span&gt;&lt;/div&gt;&lt;button class=&quot;button primary&quot;&gt;完成设置&lt;/button&gt;&#x27;
+      ];
+      const renderOnboard = index =&gt; {
+        onboardContent.innerHTML = onboardViews[index];
+        root.querySelectorAll(&#x27;.step-dots i&#x27;).forEach((dot, i) =&gt; dot.classList.toggle(&#x27;active&#x27;, i === index));
+        root.querySelectorAll(&#x27;#onboard-switch button&#x27;).forEach((button, i) =&gt; button.classList.toggle(&#x27;active&#x27;, i === index));
+      };
+      renderOnboard(0);
+      root.querySelectorAll(&#x27;#onboard-switch button&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; renderOnboard(Number(button.dataset.step))));
+
+      const importModal = root.querySelector(&#x27;#import-modal&#x27;);
+      root.querySelectorAll(&#x27;[data-import]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; { root.querySelector(&#x27;#import-title&#x27;).textContent = button.dataset.import + &#x27; 导入预览&#x27;; importModal.classList.add(&#x27;show&#x27;); }));
+      root.querySelectorAll(&#x27;[data-close-import]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; importModal.classList.remove(&#x27;show&#x27;)));
+
+      const modelModal = root.querySelector(&#x27;#model-modal&#x27;);
+      root.querySelectorAll(&#x27;[data-open-model]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; modelModal.classList.add(&#x27;show&#x27;)));
+      root.querySelectorAll(&#x27;[data-close-model]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; modelModal.classList.remove(&#x27;show&#x27;)));
+      root.querySelector(&#x27;#load-models&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; showToast(&#x27;模型列表不可用 · 可直接填写模型 ID&#x27;));
+      root.querySelector(&#x27;#test-model&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; showToast(&#x27;Chat 接口连接成功&#x27;));
+      root.querySelector(&#x27;[data-demo-error]&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+        root.querySelectorAll(&#x27;.nav button[data-page]&#x27;).forEach(item =&gt; item.classList.toggle(&#x27;active&#x27;, item.dataset.page === &#x27;panel&#x27;));
+        pages.forEach(page =&gt; page.classList.toggle(&#x27;active&#x27;, page.dataset.view === &#x27;panel&#x27;));
+        island.classList.remove(&#x27;expanded&#x27;); island.classList.add(&#x27;show&#x27;, &#x27;error&#x27;);
+        islandTitle.textContent = &#x27;翻译失败&#x27;; islandResult.textContent = &#x27;模型暂时无法响应 · 点击重试&#x27;;
+        root.querySelector(&#x27;#island-copy-button&#x27;).textContent = &#x27;重试&#x27;;
+      });
+    })();
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

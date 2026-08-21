@@ -1,0 +1,64 @@
+name: Pico
+options:
+  bundleIdPrefix: com.linjunc
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+packages:
+  KeyboardShortcuts:
+    url: https://github.com/sindresorhus/KeyboardShortcuts
+    from: 2.3.0
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    from: 2.6.0
+settings:
+  base:
+    SWIFT_VERSION: 6.0
+    MACOSX_DEPLOYMENT_TARGET: 14.0
+    CLANG_ENABLE_MODULES: YES
+targets:
+  Pico:
+    type: application
+    platform: macOS
+    sources:
+      - path: Pico
+    dependencies:
+      - package: KeyboardShortcuts
+      - package: Sparkle
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.linjunc.pico
+        PRODUCT_NAME: Pico
+        INFOPLIST_FILE: Pico/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Pico/Resources/Pico.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+        CODE_SIGN_STYLE: Automatic
+        ENABLE_HARDENED_RUNTIME: YES
+    scheme:
+      testTargets:
+        - PicoTests
+        - PicoUITests
+  PicoTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: PicoTests
+    dependencies:
+      - target: Pico
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.linjunc.pico.tests
+        GENERATE_INFOPLIST_FILE: YES
+  PicoUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - path: PicoUITests
+    dependencies:
+      - target: Pico
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.linjunc.pico.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: Pico
+

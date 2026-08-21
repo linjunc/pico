@@ -1,0 +1,671 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06F6651B09EC80F5234FCC6F /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 35B7F958C6415005D8695DB9 /* KeyboardShortcuts */; };
+		0D6A2B24BD15AC456B62BA3C /* PasteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF41757DB73F5FA77BD0DF18 /* PasteService.swift */; };
+		12C292E3DB8D6C06E4022C66 /* ClipboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC9EF0F4BE05A1D07DA1BF /* ClipboardRepository.swift */; };
+		1A50DB07A59AE8CD49937B88 /* PicoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B4D9CE5B80F9DC887D274 /* PicoMainView.swift */; };
+		2396BD6EAA51F87497A0B986 /* TranslationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D76237CD31426DBD16B00D /* TranslationCoordinator.swift */; };
+		41005CE90355F0EEEAD1E55D /* ClipboardContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE555DF08E6419BDACB171 /* ClipboardContentType.swift */; };
+		5B8527CB425905642F275A11 /* PicoSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5702E812E979B7740E455C4 /* PicoSettingsView.swift */; };
+		74FF89B119F1E3639B8ADDD7 /* AIModelConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2D79B102BF1A7CF39E108B /* AIModelConfiguration.swift */; };
+		756FB65497E17A8CB017F920 /* CoreBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD4F4A09405C04CD776F54B /* CoreBehaviorTests.swift */; };
+		78373DDD59850C0C6F4A94E4 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0381240BCCFC99D849192FE1 /* OCRService.swift */; };
+		808D782C94E77251CFB254C4 /* ClipboardImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54265860A8A7DC661D3BD117 /* ClipboardImporter.swift */; };
+		8447D970931C837250156C54 /* TranslationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7273D1B9811346793C24E /* TranslationDirection.swift */; };
+		9F5DFD803F116951012EB4B5 /* OpenAICompatibleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18EE7D3E77E6830BAB5B53C /* OpenAICompatibleClient.swift */; };
+		BAD8B060033626C00B99BB5A /* HistoryRetentionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45243028D13BFD35C19A4ADD /* HistoryRetentionPolicy.swift */; };
+		C033D055514A79D8A647FBA7 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 67A306E11E680F98DF9963DC /* Sparkle */; };
+		E9C15D1967CC5D6133E8745B /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFE6114D5B2596ED1C62E5C /* Notifications.swift */; };
+		EA7A4024A24F61890251F04D /* PicoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFBD2911D5C9F70767EE98C /* PicoApp.swift */; };
+		EAA2F9C4E0DC9407A105C642 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1686225CFE286D0F37ABA /* ClipboardMonitor.swift */; };
+		ECB28D335D767A93CA3F8CF4 /* ClipboardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B03541D39CCF84E25594F24 /* ClipboardEntry.swift */; };
+		F866B9D632C929477AA3466D /* PicoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CAFE207CD27121E0E7CA4B /* PicoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6ECAF72707F76EEF5E33A71D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 531AD374734BFB524E5C551B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EFCFDBD23F520BA04365D5A;
+			remoteInfo = Pico;
+		};
+		C0B912AC81D526A986B05A3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 531AD374734BFB524E5C551B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EFCFDBD23F520BA04365D5A;
+			remoteInfo = Pico;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0381240BCCFC99D849192FE1 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
+		17580C5248A953C6423F414E /* PicoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CDE555DF08E6419BDACB171 /* ClipboardContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardContentType.swift; sourceTree = "<group>"; };
+		31DEFF896719633861D66AB7 /* Pico.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pico.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FEC9EF0F4BE05A1D07DA1BF /* ClipboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardRepository.swift; sourceTree = "<group>"; };
+		45243028D13BFD35C19A4ADD /* HistoryRetentionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRetentionPolicy.swift; sourceTree = "<group>"; };
+		4AFBD2911D5C9F70767EE98C /* PicoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoApp.swift; sourceTree = "<group>"; };
+		4BFE6114D5B2596ED1C62E5C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		4DD4F4A09405C04CD776F54B /* CoreBehaviorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBehaviorTests.swift; sourceTree = "<group>"; };
+		53A1686225CFE286D0F37ABA /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
+		53D76237CD31426DBD16B00D /* TranslationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationCoordinator.swift; sourceTree = "<group>"; };
+		54265860A8A7DC661D3BD117 /* ClipboardImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardImporter.swift; sourceTree = "<group>"; };
+		59CAFE207CD27121E0E7CA4B /* PicoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoUITests.swift; sourceTree = "<group>"; };
+		7B03541D39CCF84E25594F24 /* ClipboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntry.swift; sourceTree = "<group>"; };
+		83C19C609D719AB51A9F8BDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A21B4D9CE5B80F9DC887D274 /* PicoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoMainView.swift; sourceTree = "<group>"; };
+		A5702E812E979B7740E455C4 /* PicoSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoSettingsView.swift; sourceTree = "<group>"; };
+		A78B4F6BF9654A879461D5BC /* Pico.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pico.entitlements; sourceTree = "<group>"; };
+		BBC7273D1B9811346793C24E /* TranslationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationDirection.swift; sourceTree = "<group>"; };
+		C18EE7D3E77E6830BAB5B53C /* OpenAICompatibleClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAICompatibleClient.swift; sourceTree = "<group>"; };
+		C95C0BD6E369F6FC6C9F2BA2 /* PicoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF2D79B102BF1A7CF39E108B /* AIModelConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIModelConfiguration.swift; sourceTree = "<group>"; };
+		DF41757DB73F5FA77BD0DF18 /* PasteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		966CFB682AA11E4AA3CBE2DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06F6651B09EC80F5234FCC6F /* KeyboardShortcuts in Frameworks */,
+				C033D055514A79D8A647FBA7 /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F4D63BD50CA9815A18624A8 /* PicoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				59CAFE207CD27121E0E7CA4B /* PicoUITests.swift */,
+			);
+			path = PicoUITests;
+			sourceTree = "<group>";
+		};
+		1AEC39D6184F97747D27F4CC /* Clipboard */ = {
+			isa = PBXGroup;
+			children = (
+				53A1686225CFE286D0F37ABA /* ClipboardMonitor.swift */,
+				0381240BCCFC99D849192FE1 /* OCRService.swift */,
+				DF41757DB73F5FA77BD0DF18 /* PasteService.swift */,
+			);
+			path = Clipboard;
+			sourceTree = "<group>";
+		};
+		25540A53E06D344E4A7F0EA2 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				7B03541D39CCF84E25594F24 /* ClipboardEntry.swift */,
+				3FEC9EF0F4BE05A1D07DA1BF /* ClipboardRepository.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		35179F10A5B96B762A2619B6 /* PicoTests */ = {
+			isa = PBXGroup;
+			children = (
+				4DD4F4A09405C04CD776F54B /* CoreBehaviorTests.swift */,
+			);
+			path = PicoTests;
+			sourceTree = "<group>";
+		};
+		733030982C72AC618B07D6BE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				83C19C609D719AB51A9F8BDE /* Info.plist */,
+				A78B4F6BF9654A879461D5BC /* Pico.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7A9078B26FA0A948028552FD /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				DF2D79B102BF1A7CF39E108B /* AIModelConfiguration.swift */,
+				C18EE7D3E77E6830BAB5B53C /* OpenAICompatibleClient.swift */,
+				53D76237CD31426DBD16B00D /* TranslationCoordinator.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
+		A9AD38EB638E3F1B7707A1C8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4AFBD2911D5C9F70767EE98C /* PicoApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B47C27FEDB2A6C21C3D3C490 /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				54265860A8A7DC661D3BD117 /* ClipboardImporter.swift */,
+			);
+			path = Import;
+			sourceTree = "<group>";
+		};
+		BFDC7BFD394047094CFCD000 /* Pico */ = {
+			isa = PBXGroup;
+			children = (
+				7A9078B26FA0A948028552FD /* AI */,
+				A9AD38EB638E3F1B7707A1C8 /* App */,
+				1AEC39D6184F97747D27F4CC /* Clipboard */,
+				DD84DE67F0618701F0DBE6A3 /* Core */,
+				B47C27FEDB2A6C21C3D3C490 /* Import */,
+				733030982C72AC618B07D6BE /* Resources */,
+				25540A53E06D344E4A7F0EA2 /* Storage */,
+				D9CD5E0228EA3B1A394149A7 /* UI */,
+			);
+			path = Pico;
+			sourceTree = "<group>";
+		};
+		D9CD5E0228EA3B1A394149A7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A21B4D9CE5B80F9DC887D274 /* PicoMainView.swift */,
+				A5702E812E979B7740E455C4 /* PicoSettingsView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		DD84DE67F0618701F0DBE6A3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2CDE555DF08E6419BDACB171 /* ClipboardContentType.swift */,
+				45243028D13BFD35C19A4ADD /* HistoryRetentionPolicy.swift */,
+				4BFE6114D5B2596ED1C62E5C /* Notifications.swift */,
+				BBC7273D1B9811346793C24E /* TranslationDirection.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EF5D1B08FD6AE6A2F8CD9200 = {
+			isa = PBXGroup;
+			children = (
+				BFDC7BFD394047094CFCD000 /* Pico */,
+				35179F10A5B96B762A2619B6 /* PicoTests */,
+				0F4D63BD50CA9815A18624A8 /* PicoUITests */,
+				EF785806F2F122A3555A164A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF785806F2F122A3555A164A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31DEFF896719633861D66AB7 /* Pico.app */,
+				C95C0BD6E369F6FC6C9F2BA2 /* PicoTests.xctest */,
+				17580C5248A953C6423F414E /* PicoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7EFCFDBD23F520BA04365D5A /* Pico */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7357D305886D426947C075A6 /* Build configuration list for PBXNativeTarget "Pico" */;
+			buildPhases = (
+				C46E12D56D2CA1AF71A171BB /* Sources */,
+				966CFB682AA11E4AA3CBE2DA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pico;
+			packageProductDependencies = (
+				35B7F958C6415005D8695DB9 /* KeyboardShortcuts */,
+				67A306E11E680F98DF9963DC /* Sparkle */,
+			);
+			productName = Pico;
+			productReference = 31DEFF896719633861D66AB7 /* Pico.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A801947BABF0B6E2663C4330 /* PicoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3146A2184576E2E065558176 /* Build configuration list for PBXNativeTarget "PicoUITests" */;
+			buildPhases = (
+				CEB09FC14170E69247C9BA91 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85D6F725E6EB89B6A56D88C4 /* PBXTargetDependency */,
+			);
+			name = PicoUITests;
+			packageProductDependencies = (
+			);
+			productName = PicoUITests;
+			productReference = 17580C5248A953C6423F414E /* PicoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		B1D047762D8C6572E7E92B37 /* PicoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76B42B5F06B9AFB7EF7659CA /* Build configuration list for PBXNativeTarget "PicoTests" */;
+			buildPhases = (
+				C8FEC19E1607AE4589F7FDA9 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3B257C3288371468BAE338CF /* PBXTargetDependency */,
+			);
+			name = PicoTests;
+			packageProductDependencies = (
+			);
+			productName = PicoTests;
+			productReference = C95C0BD6E369F6FC6C9F2BA2 /* PicoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		531AD374734BFB524E5C551B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					7EFCFDBD23F520BA04365D5A = {
+						ProvisioningStyle = Automatic;
+					};
+					A801947BABF0B6E2663C4330 = {
+						TestTargetID = 7EFCFDBD23F520BA04365D5A;
+					};
+				};
+			};
+			buildConfigurationList = 63B3B1CFFE56B6C177EEE046 /* Build configuration list for PBXProject "Pico" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EF5D1B08FD6AE6A2F8CD9200;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F64AB3A53229A082744F4D41 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				827A226DB996628E05DD76D1 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EF785806F2F122A3555A164A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7EFCFDBD23F520BA04365D5A /* Pico */,
+				B1D047762D8C6572E7E92B37 /* PicoTests */,
+				A801947BABF0B6E2663C4330 /* PicoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C46E12D56D2CA1AF71A171BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74FF89B119F1E3639B8ADDD7 /* AIModelConfiguration.swift in Sources */,
+				41005CE90355F0EEEAD1E55D /* ClipboardContentType.swift in Sources */,
+				ECB28D335D767A93CA3F8CF4 /* ClipboardEntry.swift in Sources */,
+				808D782C94E77251CFB254C4 /* ClipboardImporter.swift in Sources */,
+				EAA2F9C4E0DC9407A105C642 /* ClipboardMonitor.swift in Sources */,
+				12C292E3DB8D6C06E4022C66 /* ClipboardRepository.swift in Sources */,
+				BAD8B060033626C00B99BB5A /* HistoryRetentionPolicy.swift in Sources */,
+				E9C15D1967CC5D6133E8745B /* Notifications.swift in Sources */,
+				78373DDD59850C0C6F4A94E4 /* OCRService.swift in Sources */,
+				9F5DFD803F116951012EB4B5 /* OpenAICompatibleClient.swift in Sources */,
+				0D6A2B24BD15AC456B62BA3C /* PasteService.swift in Sources */,
+				EA7A4024A24F61890251F04D /* PicoApp.swift in Sources */,
+				1A50DB07A59AE8CD49937B88 /* PicoMainView.swift in Sources */,
+				5B8527CB425905642F275A11 /* PicoSettingsView.swift in Sources */,
+				2396BD6EAA51F87497A0B986 /* TranslationCoordinator.swift in Sources */,
+				8447D970931C837250156C54 /* TranslationDirection.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8FEC19E1607AE4589F7FDA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				756FB65497E17A8CB017F920 /* CoreBehaviorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEB09FC14170E69247C9BA91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F866B9D632C929477AA3466D /* PicoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3B257C3288371468BAE338CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EFCFDBD23F520BA04365D5A /* Pico */;
+			targetProxy = 6ECAF72707F76EEF5E33A71D /* PBXContainerItemProxy */;
+		};
+		85D6F725E6EB89B6A56D88C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EFCFDBD23F520BA04365D5A /* Pico */;
+			targetProxy = C0B912AC81D526A986B05A3C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0539B9B84599C831690AA62F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.linjunc.pico.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pico.app/Contents/MacOS/Pico";
+			};
+			name = Release;
+		};
+		101E9543C98B31014F6AAB29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		387E1E01911C9FDC6667AFCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.linjunc.pico.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pico.app/Contents/MacOS/Pico";
+			};
+			name = Debug;
+		};
+		3E85C22A69F8F1626C0D449A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.linjunc.pico.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = Pico;
+			};
+			name = Release;
+		};
+		58AA2A9879D6F68E97E95CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		6E84284654C4D12E160ECD3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Pico/Resources/Pico.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Pico/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.linjunc.pico;
+				PRODUCT_NAME = Pico;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7B853AC1CEF25640598970F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Pico/Resources/Pico.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Pico/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.linjunc.pico;
+				PRODUCT_NAME = Pico;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DC45FEDCD83E1033C2625095 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.linjunc.pico.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = Pico;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3146A2184576E2E065558176 /* Build configuration list for PBXNativeTarget "PicoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC45FEDCD83E1033C2625095 /* Debug */,
+				3E85C22A69F8F1626C0D449A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		63B3B1CFFE56B6C177EEE046 /* Build configuration list for PBXProject "Pico" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				101E9543C98B31014F6AAB29 /* Debug */,
+				58AA2A9879D6F68E97E95CB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7357D305886D426947C075A6 /* Build configuration list for PBXNativeTarget "Pico" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B853AC1CEF25640598970F6 /* Debug */,
+				6E84284654C4D12E160ECD3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		76B42B5F06B9AFB7EF7659CA /* Build configuration list for PBXNativeTarget "PicoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				387E1E01911C9FDC6667AFCB /* Debug */,
+				0539B9B84599C831690AA62F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		827A226DB996628E05DD76D1 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.0;
+			};
+		};
+		F64AB3A53229A082744F4D41 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35B7F958C6415005D8695DB9 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F64AB3A53229A082744F4D41 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
+		};
+		67A306E11E680F98DF9963DC /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 827A226DB996628E05DD76D1 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 531AD374734BFB524E5C551B /* Project object */;
+}
