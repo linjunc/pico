@@ -57,3 +57,13 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
 - Homebrew Cask：由独立 `linjunc/homebrew-pico` tap 维护
 - curl：调用仓库内 `scripts/install.sh`
 - 不提交 Mac App Store，不实现 App Store 收据或沙盒同步
+
+### 未签名版本说明
+
+当前 v1.0.0 可以在没有 Apple Developer 账号的情况下发布。首次打开时 macOS 可能提示“无法验证开发者”，请在 Finder 中右键 `Pico.app`，选择“打开”，再确认一次。Homebrew 和 curl 安装的版本也遵循相同流程。
+
+本地生成未签名发布包：
+
+```bash
+RELEASE_TAG=v1.0.0 scripts/build-unsigned-dmg.sh
+```

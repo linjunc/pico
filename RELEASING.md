@@ -2,6 +2,24 @@
 
 Pico 只发布 GitHub Release，不提交 Mac App Store。每次正式版本至少上传 DMG、ZIP 和 SHA-256 文件；Homebrew Cask 在发布后更新版本与校验值。
 
+## v1.0.0 未签名发布
+
+没有 Apple Developer 账号时使用：
+
+```bash
+RELEASE_TAG=v1.0.0 scripts/build-unsigned-dmg.sh
+```
+
+产物位于 `build/release/`：
+
+- `Pico-v1.0.0.dmg`
+- `Pico-v1.0.0.zip`
+- `Pico-v1.0.0.dmg.sha256`
+
+在 GitHub 创建 `v1.0.0` Release 后上传上述三个文件。用户首次启动需要右键 `Pico.app` → “打开” → “打开”。这属于未签名版本的正常 Gatekeeper 行为。
+
+未签名版本可以通过 Homebrew Cask 安装，但不能绕过 Gatekeeper；正式签名和公证需要 Developer ID Application。
+
 本地 Debug 构建不需要签名。正式发布需要 Apple Developer ID Application、Apple 公证凭据和 Sparkle Ed25519 公钥/私钥。
 
 ```bash
