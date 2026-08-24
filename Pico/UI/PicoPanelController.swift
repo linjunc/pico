@@ -58,12 +58,13 @@ final class PicoPanelController {
         // 1. 计算面板位置：跟随鼠标所在屏幕，屏幕内居中；小屏自适应缩小
         let screen = screenContainingMouse() ?? NSScreen.main ?? NSScreen.screens.first!
         let sf = screen.visibleFrame
-        let width = min(1200, sf.width - 24)
-        let height = min(420, sf.height - 24)
+        // 面板不再铺满大屏：固定在舒适的 980pt 基准，小屏才按可视区域收缩。
+        let width = min(980, max(720, sf.width - 48))
+        let height = min(500, max(360, sf.height - 48))
         let x = sf.midX - width / 2
         let y = sf.midY - height / 2
-        let clampedX = max(sf.minX + 12, min(x, sf.maxX - width - 12))
-        let clampedY = max(sf.minY + 12, min(y, sf.maxY - height - 12))
+        let clampedX = max(sf.minX + 24, min(x, sf.maxX - width - 24))
+        let clampedY = max(sf.minY + 24, min(y, sf.maxY - height - 24))
         panel.setFrame(NSRect(x: clampedX, y: clampedY, width: width, height: height), display: true)
 
         // 2. 显示。键盘事件只路由给 active app 的 key window —— accessory app 若从未

@@ -27,7 +27,11 @@ final class PasteService {
     /// activate 是异步的，固定延时不可靠（这正是之前粘贴失败的原因之一）。
     func paste(_ entry: ClipboardEntry, plainText: Bool = false, targetApplication: NSRunningApplication?) {
         copy(entry, plainText: plainText)
-        guard AXIsProcessTrusted() else {
+        // 使用公开键名避免 Swift 6 将 C 全局变量标记为非并发安全。
+        let trusted = AXIsProcessTrustedWithOptions([
+            "AXTrustedCheckOptionPrompt": true
+        ] as CFDictionary)
+        guard trusted else {
             NotificationCenter.default.post(name: .picoPasteNeedsAccessibility, object: nil)
             return
         }
@@ -45,7 +49,7 @@ final class PasteService {
         if front?.processIdentifier == targetPID {
             // 目标 app 已是 frontmost，再等一小拍让它的 firstResponder 稳定。
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80)) { [weak self] in
-                self?.postCommandV()
+                self?.postCommandV(to: targetPID)
             }
             return
         }
@@ -59,7 +63,7 @@ final class PasteService {
         }
     }
 
-    private func postCommandV() {
+    private func postCommandV(to targetPID: pid_t) {
         let source = CGEventSource(stateID: .hidSystemState)
         let keyV: CGKeyCode = 0x09 // kVK_ANSI_V
         guard let keyDown = CGEvent(keyboardEventSource: source, virtualKey: keyV, keyDown: true),
@@ -67,7 +71,8 @@ final class PasteService {
         else { return }
         keyDown.flags = .maskCommand
         keyUp.flags = .maskCommand
-        keyDown.post(tap: .cghidEventTap)
-        keyUp.post(tap: .cghidEventTap)
+        // 直接投递到目标进程，避免面板或菜单栏应用重新成为事件接收者。
+        keyDown.postToPid(targetPID)
+        keyUp.postToPid(targetPID)
     }
 }
