@@ -494,7 +494,7 @@ private struct ClipboardCard: View {
             }
         }
         .padding(13)
-        .frame(minHeight: 156)
+        .frame(minHeight: entry.contentType == .image ? 112 : 156)
         .background(
             LinearGradient(
                 colors: selected
@@ -560,32 +560,7 @@ private struct ClipboardCard: View {
 
     @ViewBuilder
     private var thumbnail: some View {
-        if entry.contentType == .image, let data = entry.imageData, let image = NSImage(data: data) {
-            // 用 .fit + 固定高度，避免超宽图把卡片撑炸
-            Image(nsImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: .infinity)
-                .frame(height: 78)
-                .background(Color.black.opacity(0.55))
-                .clipShape(RoundedRectangle(cornerRadius: 7))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 7)
-                        .stroke(Color.white.opacity(0.06), lineWidth: 0.5)
-                )
-        } else if entry.contentType == .image {
-            // 容错：imageData 解码失败
-            HStack {
-                Image(systemName: "photo")
-                    .foregroundStyle(.cyan)
-                Text(entry.ocrText ?? "图片")
-                    .font(.caption2)
-                    .lineLimit(1)
-                    .foregroundStyle(.secondary)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        } else {
-            EmptyView()
-        }
+        // 图片内容不在历史卡片中重复展示；类型图标和“图片”标签已经足够识别。
+        EmptyView()
     }
 }
