@@ -1,5 +1,7 @@
 # Pico 发布
 
+Pico 只发布 GitHub Release，不提交 Mac App Store。每次正式版本至少上传 DMG、ZIP 和 SHA-256 文件；Homebrew Cask 在发布后更新版本与校验值。
+
 本地 Debug 构建不需要签名。正式发布需要 Apple Developer ID Application、Apple 公证凭据和 Sparkle Ed25519 公钥/私钥。
 
 ```bash
@@ -13,3 +15,21 @@ GitHub Actions 发布前需要配置 `SIGNING_IDENTITY`、`APPLE_TEAM_ID`、证�
 
 Homebrew Cask 应指向 GitHub Release 中的公证 DMG，并在每个版本发布时更新版本号和 SHA-256。
 
+## 发布检查清单
+
+1. 更新 `CFBundleShortVersionString` 和 `CFBundleVersion`。
+2. 运行 `xcodegen generate`，确认 Debug 构建和单元测试。
+3. 用 Developer ID 签名并公证 App，确认 `spctl --assess` 通过。
+4. 运行 `scripts/build-release-dmg.sh`，生成 DMG、ZIP、SHA-256。
+5. 在 GitHub 创建 `vX.Y.Z` Release，上传全部产物。
+6. 将 `packaging/homebrew/pico.rb` 中的版本和 SHA-256 同步到独立 tap。
+7. 用以下三种方式做干净机器验收：
+
+   ```bash
+   brew install --cask linjunc/pico/pico
+   curl -fsSL https://raw.githubusercontent.com/linjunc/pico/main/scripts/install.sh | sh
+   ```
+
+   以及手动打开 DMG 拖入 `/Applications`。
+
+8. 首次启动检查辅助功能授权、`⌘⇧V`、粘贴、登录启动和卸载残留。
