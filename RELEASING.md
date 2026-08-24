@@ -18,6 +18,16 @@ RELEASE_TAG=v1.0.0 scripts/build-unsigned-dmg.sh
 
 在 GitHub 创建 `v1.0.0` Release 后上传上述三个文件。用户首次启动需要右键 `Pico.app` → “打开” → “打开”。这属于未签名版本的正常 Gatekeeper 行为。
 
+也可以使用一键上传脚本：
+
+```bash
+brew install gh
+gh auth login
+RELEASE_TAG=v1.0.0 scripts/publish-github-release.sh
+```
+
+脚本会自动创建或更新 GitHub Release，并上传 DMG、ZIP 和 SHA-256 文件。没有 `gh` 时可以设置具有仓库写权限的 `GITHUB_TOKEN`，脚本会自动切换到 GitHub API。
+
 未签名版本可以通过 Homebrew Cask 安装，但不能绕过 Gatekeeper；正式签名和公证需要 Developer ID Application。
 
 本地 Debug 构建不需要签名。正式发布需要 Apple Developer ID Application、Apple 公证凭据和 Sparkle Ed25519 公钥/私钥。
