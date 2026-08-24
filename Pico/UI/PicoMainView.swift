@@ -474,11 +474,13 @@ private struct ClipboardCard: View {
 
             thumbnail
 
-            Text(displayText)
-                .font(.system(size: 12))
-                .foregroundStyle(.primary)
-                .lineLimit(3)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            if entry.contentType != .image {
+                Text(displayText)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.primary)
+                    .lineLimit(3)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
 
             Spacer(minLength: 0)
 
@@ -494,7 +496,7 @@ private struct ClipboardCard: View {
             }
         }
         .padding(13)
-        .frame(minHeight: entry.contentType == .image ? 112 : 156)
+        .frame(minHeight: entry.contentType == .image ? 150 : 156)
         .background(
             LinearGradient(
                 colors: selected
@@ -560,7 +562,16 @@ private struct ClipboardCard: View {
 
     @ViewBuilder
     private var thumbnail: some View {
-        // 图片内容不在历史卡片中重复展示；类型图标和“图片”标签已经足够识别。
-        EmptyView()
+        if entry.contentType == .image, let data = entry.imageData, let image = NSImage(data: data) {
+            Image(nsImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity)
+                .frame(height: 78)
+                .background(Color.black.opacity(0.5))
+                .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+        } else {
+            EmptyView()
+        }
     }
 }
