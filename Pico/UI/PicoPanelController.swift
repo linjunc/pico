@@ -58,9 +58,9 @@ final class PicoPanelController {
         // 1. 计算面板位置：跟随鼠标所在屏幕，屏幕内居中；小屏自适应缩小
         let screen = screenContainingMouse() ?? NSScreen.main ?? NSScreen.screens.first!
         let sf = screen.visibleFrame
-        // 面板不再铺满大屏：固定在舒适的 980pt 基准，小屏才按可视区域收缩。
-        let width = min(980, max(720, sf.width - 48))
-        let height = min(500, max(360, sf.height - 48))
+        // 快捷面板保持轻量：固定在 820pt 基准，小屏才按可视区域收缩。
+        let width = min(820, max(680, sf.width - 48))
+        let height = min(420, max(340, sf.height - 48))
         let x = sf.midX - width / 2
         let y = sf.midY - height / 2
         let clampedX = max(sf.minX + 24, min(x, sf.maxX - width - 24))

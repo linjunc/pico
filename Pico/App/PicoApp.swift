@@ -63,9 +63,9 @@ final class PicoAppState: ObservableObject {
     /// 当前布局的列数（和 entryGrid 中保持一致）
     var gridColumnCount: Int {
         switch selectedLayout {
-        case "紧凑": return 5
+        case "紧凑": return 4
         case "纵向": return 2
-        default: return 4
+        default: return 3
         }
     }
 

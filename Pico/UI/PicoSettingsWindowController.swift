@@ -26,7 +26,9 @@ final class PicoSettingsWindowController {
 
     func show(state: PicoAppState) {
         if let window {
+            window.level = .floating
             NSApp.activate(ignoringOtherApps: true) // 设置是用户主动打开的常规窗口，正常抢焦点
+            window.orderFrontRegardless()
             window.makeKeyAndOrderFront(nil)
             return
         }
@@ -37,6 +39,7 @@ final class PicoSettingsWindowController {
             defer: false
         )
         w.title = "Pico 设置"
+        w.level = .floating
         w.isReleasedWhenClosed = false // 复用，点红绿灯只是 orderOut
         w.setContentSize(NSSize(width: 860, height: 640))
         w.center()
@@ -47,6 +50,7 @@ final class PicoSettingsWindowController {
         )
         window = w
         NSApp.activate(ignoringOtherApps: true)
+        w.orderFrontRegardless()
         w.makeKeyAndOrderFront(nil)
     }
 }
