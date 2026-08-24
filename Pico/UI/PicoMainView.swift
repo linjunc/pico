@@ -127,7 +127,11 @@ struct PicoMainView: View {
     // MARK: - 头部
     private var header: some View {
         HStack(spacing: 10) {
-            Image(systemName: "doc.on.clipboard.fill").foregroundStyle(.cyan)
+            Text("P")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundStyle(Color.black.opacity(0.85))
+                .frame(width: 25, height: 25)
+                .background(Color.cyan, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
             Text("Pico").font(.system(size: 15, weight: .semibold))
             Spacer()
             Picker("布局", selection: $state.selectedLayout) {

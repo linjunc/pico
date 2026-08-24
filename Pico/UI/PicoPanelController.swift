@@ -34,7 +34,8 @@ final class PicoPanelController {
     private func ensurePanel(content: some View) -> PicoPanel {
         if let panel { return panel }
         let p = PicoPanel(contentRect: .zero, styleMask: [.borderless], backing: .buffered, defer: false)
-        p.hasShadow = true
+        // 由 SwiftUI 内容提供柔和阴影，避免 NSPanel 默认阴影在圆角外形成硬边。
+        p.hasShadow = false
         p.backgroundColor = .clear
         p.isOpaque = false
         p.level = .floating
