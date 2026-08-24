@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct PicoMainView: View {
     @EnvironmentObject private var state: PicoAppState
@@ -92,6 +93,13 @@ struct PicoMainView: View {
         } message: { dialog in
             Text(dialog.isCreate ? "为剪贴板分组起个名字" : "输入新的分组名称")
         }
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.white.opacity(0.12), lineWidth: 1)
+                .allowsHitTesting(false)
+        }
+        .shadow(color: .black.opacity(0.42), radius: 28, y: 14)
     }
 
 
@@ -186,6 +194,7 @@ struct PicoMainView: View {
             }
 
             ForEach(state.repository.groups) { group in
+                let groupID = group.id
                 GroupButton(
                     title: group.name,
                     icon: group.iconName,
@@ -193,6 +202,19 @@ struct PicoMainView: View {
                     active: state.selection == .group(group.id)
                 ) {
                     state.selection = .group(group.id); state.selectedID = nil
+                }
+                .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                    guard let provider = providers.first else { return false }
+                    provider.loadObject(ofClass: NSString.self) { object, _ in
+                        guard let raw = object as? String, let entryID = UUID(uuidString: raw) else { return }
+                        Task { @MainActor in
+                            if let entry = state.repository.entries.first(where: { $0.id == entryID }),
+                               let destination = state.repository.groups.first(where: { $0.id == groupID }) {
+                                state.repository.add(entry, to: destination)
+                            }
+                        }
+                    }
+                    return true
                 }
                 // 双击直接重命名
                 .onTapGesture(count: 2) {
@@ -264,6 +286,9 @@ struct PicoMainView: View {
                             onDelete: { state.repository.delete(entry) }
                         )
                         .id(entry.id)
+                        .onDrag {
+                            NSItemProvider(object: entry.id.uuidString as NSString)
+                        }
                     }
                 }
                 .padding(18)

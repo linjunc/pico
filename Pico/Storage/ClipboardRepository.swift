@@ -121,6 +121,10 @@ final class ClipboardRepository: ObservableObject {
 
     func deleteGroup(_ group: ClipboardGroup) {
         let groupID = group.id
+        // 先更新发布状态，让侧栏立即响应；SwiftData 持久化随后完成。
+        groups.removeAll { $0.id == groupID }
+        membershipsByGroup.removeValue(forKey: groupID)
+        groupsByEntry = groupsByEntry.mapValues { $0.filter { $0.id != groupID } }
         let descriptor = FetchDescriptor<GroupMembership>(predicate: #Predicate { $0.groupID == groupID })
         if let ms = try? context.fetch(descriptor) { for m in ms { context.delete(m) } }
         context.delete(group)
