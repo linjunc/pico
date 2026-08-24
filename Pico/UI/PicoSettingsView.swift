@@ -41,9 +41,19 @@ struct PicoSettingsView: View {
 
 private struct GeneralSettings: View {
     @ObservedObject var state: PicoAppState
+    @State private var launchAtLogin = PicoLaunchAtLogin.shared.isEnabled
     var body: some View {
         Section("启动与历史") {
-            Toggle("登录时启动 Pico", isOn: .constant(true))
+            Toggle("登录时启动 Pico", isOn: Binding(
+                get: { launchAtLogin },
+                set: {
+                    launchAtLogin = $0
+                    PicoLaunchAtLogin.shared.setEnabled($0)
+                }
+            ))
+            Text("Pico 将以菜单栏应用运行，不占用 Dock。")
+                .font(.caption)
+                .foregroundStyle(.secondary)
             Picker("历史保留", selection: .constant(HistoryRetentionPolicy.month)) {
                 Text("一周").tag(HistoryRetentionPolicy.week)
                 Text("一个月").tag(HistoryRetentionPolicy.month)

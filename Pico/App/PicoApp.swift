@@ -1,6 +1,7 @@
 import AppKit
 import KeyboardShortcuts
 import Sparkle
+import ServiceManagement
 import SwiftUI
 import SwiftData
 
@@ -62,9 +63,9 @@ final class PicoAppState: ObservableObject {
     /// 当前布局的列数（和 entryGrid 中保持一致）
     var gridColumnCount: Int {
         switch selectedLayout {
-        case "紧凑": return 4
+        case "紧凑": return 5
         case "纵向": return 2
-        default: return 5
+        default: return 4
         }
     }
 
@@ -179,6 +180,7 @@ final class PicoKeyHandler {
 @MainActor
 final class PicoAppDelegate: NSObject, NSApplicationDelegate {
     var state: PicoAppState?
+    private var statusItem: NSStatusItem?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // 单实例保护：Xcode 调试残留的旧实例会抢占全局热键（RegisterEventHotKey 先到先得），
@@ -192,8 +194,22 @@ final class PicoAppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         NSApp.setActivationPolicy(.accessory)
+        installStatusItem()
         KeyboardShortcuts.onKeyDown(for: .togglePicoPanel) { [weak self] in Task { @MainActor in self?.togglePanel() } }
         KeyboardShortcuts.onKeyDown(for: .translateClipboard) { [weak self] in Task { @MainActor in self?.translateCurrentClipboard() } }
+    }
+
+    private func installStatusItem() {
+        let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        item.button?.image = NSImage(systemSymbolName: "doc.on.clipboard.fill", accessibilityDescription: "Pico")
+        item.button?.image?.isTemplate = true
+        item.button?.target = self
+        item.button?.action = #selector(statusItemClicked)
+        statusItem = item
+    }
+
+    @objc private func statusItemClicked() {
+        togglePanel()
     }
 
     func togglePanel() {
@@ -233,14 +249,32 @@ struct PicoApp: App {
     }
 
     var body: some Scene {
-        MenuBarExtra("Pico", systemImage: "doc.on.clipboard.fill") {
-            // 注意：不要给菜单项加 .keyboardShortcut —— ⌘⇧V 已由 KeyboardShortcuts
-            // 全局注册，Menu 快捷键也全局生效会双触发（开了立即关）
-            Button(PicoPanelController.shared.isVisible ? "关闭面板" : "打开剪贴板") { delegate.togglePanel() }
-            Button("设置…") { delegate.toggleSettings() }
-            Button(state.isPaused ? "恢复监听" : "暂停监听") { state.togglePause() }
-            Divider()
-            Button("退出 Pico") { NSApp.terminate(nil) }
+        // 状态栏按钮由 AppKit 管理：左键直接打开面板，不再弹出下拉菜单。
+        Settings { EmptyView() }
+    }
+}
+
+@MainActor
+final class PicoLaunchAtLogin {
+    static let shared = PicoLaunchAtLogin()
+
+    var isEnabled: Bool {
+        SMAppService.mainApp.status == .enabled
+    }
+
+    func setEnabled(_ enabled: Bool) {
+        do {
+            if enabled {
+                if SMAppService.mainApp.status != .enabled {
+                    try SMAppService.mainApp.register()
+                }
+            } else {
+                if SMAppService.mainApp.status == .enabled {
+                    try SMAppService.mainApp.unregister()
+                }
+            }
+        } catch {
+            NSLog("[Pico] launch at login update failed: %@", error.localizedDescription)
         }
     }
 }

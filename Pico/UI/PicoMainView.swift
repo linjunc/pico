@@ -231,9 +231,9 @@ struct PicoMainView: View {
     private var entryGrid: some View {
         let columns: Int = {
             switch state.selectedLayout {
-            case "紧凑": return 4
+            case "紧凑": return 5
             case "纵向": return 2
-            default: return 5
+            default: return 4
             }
         }()
         return ScrollViewReader { proxy in
@@ -266,7 +266,7 @@ struct PicoMainView: View {
                         .id(entry.id)
                     }
                 }
-                .padding(14)
+                .padding(18)
             }
             // 选中变化时让卡片滚到可视区域中心，避免上下键选出视口
             .onChange(of: state.selectedID) { _, newID in
@@ -480,10 +480,23 @@ private struct ClipboardCard: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .padding(11)
-        .frame(minHeight: 142)
-        .background(Color.white.opacity(selected ? 0.10 : 0.045), in: RoundedRectangle(cornerRadius: 12))
-        .overlay(RoundedRectangle(cornerRadius: 12).stroke(selected ? Color.cyan.opacity(0.8) : Color.white.opacity(0.08), lineWidth: 1))
+        .padding(13)
+        .frame(minHeight: 156)
+        .background(
+            LinearGradient(
+                colors: selected
+                    ? [Color.cyan.opacity(0.16), Color.blue.opacity(0.08)]
+                    : [Color.white.opacity(0.065), Color.white.opacity(0.028)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            ),
+            in: RoundedRectangle(cornerRadius: 16, style: .continuous)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(selected ? Color.cyan.opacity(0.9) : Color.white.opacity(0.09), lineWidth: selected ? 1.5 : 1)
+        )
+        .shadow(color: selected ? Color.cyan.opacity(0.12) : .clear, radius: 14, y: 5)
         .contentShape(Rectangle())
         .onTapGesture(perform: onSelect)
         .onTapGesture(count: 2, perform: onPaste)
