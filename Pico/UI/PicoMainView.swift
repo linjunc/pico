@@ -498,8 +498,8 @@ private struct ClipboardCard: View {
         .background(
             LinearGradient(
                 colors: selected
-                    ? [Color.cyan.opacity(0.16), Color.blue.opacity(0.08)]
-                    : [Color.white.opacity(0.065), Color.white.opacity(0.028)],
+                    ? [Color.cyan.opacity(0.13), Color.blue.opacity(0.06)]
+                    : [Color.white.opacity(0.048), Color.white.opacity(0.018)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             ),
@@ -507,7 +507,7 @@ private struct ClipboardCard: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .stroke(selected ? Color.cyan.opacity(0.9) : Color.white.opacity(0.09), lineWidth: selected ? 1.5 : 1)
+                .stroke(selected ? Color.cyan.opacity(0.82) : Color.white.opacity(0.045), lineWidth: selected ? 1.2 : 0.6)
         )
         .shadow(color: selected ? Color.cyan.opacity(0.12) : .clear, radius: 14, y: 5)
         .contentShape(Rectangle())

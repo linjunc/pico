@@ -201,16 +201,40 @@ final class PicoAppDelegate: NSObject, NSApplicationDelegate {
 
     private func installStatusItem() {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        item.button?.image = NSImage(systemSymbolName: "doc.on.clipboard.fill", accessibilityDescription: "Pico")
-        item.button?.image?.isTemplate = true
+        let icon = NSImage(systemSymbolName: "p.circle.fill", accessibilityDescription: "Pico")
+        icon?.isTemplate = false
+        icon?.size = NSSize(width: 18, height: 18)
+        item.button?.image = icon
+        item.button?.contentTintColor = NSColor.systemCyan
         item.button?.target = self
         item.button?.action = #selector(statusItemClicked)
+        item.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
         statusItem = item
     }
 
     @objc private func statusItemClicked() {
+        if NSApp.currentEvent?.type == .rightMouseUp {
+            showStatusMenu()
+            return
+        }
         togglePanel()
     }
+
+    private func showStatusMenu() {
+        let menu = NSMenu()
+        menu.addItem(withTitle: PicoPanelController.shared.isVisible ? "关闭面板" : "打开剪贴板", action: #selector(togglePanelFromMenu), keyEquivalent: "")
+        menu.addItem(withTitle: "设置…", action: #selector(openSettingsFromMenu), keyEquivalent: "")
+        menu.addItem(withTitle: state?.isPaused == true ? "恢复监听" : "暂停监听", action: #selector(togglePauseFromMenu), keyEquivalent: "")
+        menu.addItem(.separator())
+        menu.addItem(withTitle: "退出 Pico", action: #selector(quitFromMenu), keyEquivalent: "")
+        menu.items.forEach { $0.target = self }
+        statusItem?.popUpMenu(menu)
+    }
+
+    @objc private func togglePanelFromMenu() { togglePanel() }
+    @objc private func openSettingsFromMenu() { toggleSettings() }
+    @objc private func togglePauseFromMenu() { state?.togglePause() }
+    @objc private func quitFromMenu() { NSApp.terminate(nil) }
 
     func togglePanel() {
         guard let state else { return }
