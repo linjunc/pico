@@ -62,6 +62,19 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
 
 当前 v1.0.0 可以在没有 Apple Developer 账号的情况下发布。首次打开时 macOS 可能提示“无法验证开发者”，请在 Finder 中右键 `Pico.app`，选择“打开”，再确认一次。Homebrew 和 curl 安装的版本也遵循相同流程。
 
+如果仍然显示“Apple 无法验证 Pico.app”，先把应用拖到 `/Applications`，然后执行：
+
+```bash
+sudo xattr -dr com.apple.quarantine /Applications/Pico.app
+open /Applications/Pico.app
+```
+
+首次粘贴还需要授权：
+
+系统设置 → 隐私与安全性 → 辅助功能 → 添加 Pico → 开启权限。
+
+如果重新下载或重新构建后权限失效，删除旧的 Pico 条目，再添加当前 `/Applications/Pico.app`。
+
 本地生成未签名发布包：
 
 ```bash
