@@ -16,6 +16,18 @@ final class PicoPanelController {
     /// 记录呼出面板前正在活跃的 App（粘贴目标），需要时归还焦点
     private var previousActiveApp: NSRunningApplication?
     private(set) var isVisible: Bool = false
+    private let positionKey = "pico.panel.position"
+
+    enum PanelPosition: String, CaseIterable {
+        case top = "上方"
+        case center = "中间"
+        case bottom = "下方"
+    }
+
+    var position: PanelPosition {
+        get { PanelPosition(rawValue: UserDefaults.standard.string(forKey: positionKey) ?? "中间") ?? .center }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: positionKey) }
+    }
 
     private init() {}
 
@@ -28,7 +40,8 @@ final class PicoPanelController {
         p.level = .floating
         p.collectionBehavior = [.moveToActiveSpace, .fullScreenAuxiliary]
         p.hidesOnDeactivate = false
-        p.isMovable = false
+        p.isMovable = true
+        p.isMovableByWindowBackground = true
         let host = NSHostingController(rootView: content)
         host.sizingOptions = [] // 禁止 SwiftUI 内容反向撑大面板，由 setFrame 控制
         p.contentViewController = host
@@ -62,7 +75,13 @@ final class PicoPanelController {
         let width = min(980, max(720, sf.width - 48))
         let height = min(500, max(360, sf.height - 48))
         let x = sf.midX - width / 2
-        let y = sf.midY - height / 2
+        let y: CGFloat = {
+            switch position {
+            case .top: return sf.maxY - height - 42
+            case .bottom: return sf.minY + 42
+            case .center: return sf.midY - height / 2
+            }
+        }()
         let clampedX = max(sf.minX + 24, min(x, sf.maxX - width - 24))
         let clampedY = max(sf.minY + 24, min(y, sf.maxY - height - 24))
         panel.setFrame(NSRect(x: clampedX, y: clampedY, width: width, height: height), display: true)

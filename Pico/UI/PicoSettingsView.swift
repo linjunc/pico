@@ -62,6 +62,23 @@ private struct GeneralSettings: View {
             }
             Toggle("本地图片 OCR", isOn: .constant(true))
         }
+        Section("面板位置") {
+            Picker("显示位置", selection: Binding(
+                get: { PicoPanelController.shared.position.rawValue },
+                set: { rawValue in
+                    guard let position = PicoPanelController.PanelPosition(rawValue: rawValue) else { return }
+                    PicoPanelController.shared.position = position
+                }
+            )) {
+                ForEach(PicoPanelController.PanelPosition.allCases, id: \.rawValue) { position in
+                    Text(position.rawValue).tag(position.rawValue)
+                }
+            }
+            .pickerStyle(.segmented)
+            Text("快捷键打开时，面板会显示在所选区域；面板也可以直接拖动。")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
     }
 }
 

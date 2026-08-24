@@ -94,12 +94,7 @@ struct PicoMainView: View {
             Text(dialog.isCreate ? "为剪贴板分组起个名字" : "输入新的分组名称")
         }
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .stroke(Color.white.opacity(0.12), lineWidth: 1)
-                .allowsHitTesting(false)
-        }
-        .shadow(color: .black.opacity(0.42), radius: 28, y: 14)
+        .shadow(color: .black.opacity(0.5), radius: 24, y: 12)
     }
 
 
@@ -216,11 +211,6 @@ struct PicoMainView: View {
                     }
                     return true
                 }
-                // 双击直接重命名
-                .onTapGesture(count: 2) {
-                    groupDialogText = group.name
-                    groupDialog = .rename(group)
-                }
                 .contextMenu {
                     Button("重命名…") {
                         groupDialogText = group.name
@@ -296,9 +286,7 @@ struct PicoMainView: View {
             // 选中变化时让卡片滚到可视区域中心，避免上下键选出视口
             .onChange(of: state.selectedID) { _, newID in
                 guard let newID else { return }
-                withAnimation(.easeOut(duration: 0.15)) {
-                    proxy.scrollTo(newID, anchor: .center)
-                }
+                proxy.scrollTo(newID, anchor: .center)
             }
             // 切换分组也滚到顶
             .onChange(of: state.selection) { _, _ in
