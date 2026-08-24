@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		06F6651B09EC80F5234FCC6F /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 35B7F958C6415005D8695DB9 /* KeyboardShortcuts */; };
+		0A7977B98FC3B360CF2E81D5 /* PicoSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D2DFFC5CE67D24BB4135F /* PicoSettingsWindowController.swift */; };
 		0D6A2B24BD15AC456B62BA3C /* PasteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF41757DB73F5FA77BD0DF18 /* PasteService.swift */; };
 		12C292E3DB8D6C06E4022C66 /* ClipboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC9EF0F4BE05A1D07DA1BF /* ClipboardRepository.swift */; };
 		1A50DB07A59AE8CD49937B88 /* PicoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B4D9CE5B80F9DC887D274 /* PicoMainView.swift */; };
+		20D383F5B9A1124B88D02AE5 /* PicoPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA6C74ED342CCD1C10913E5 /* PicoPanelController.swift */; };
 		2396BD6EAA51F87497A0B986 /* TranslationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D76237CD31426DBD16B00D /* TranslationCoordinator.swift */; };
 		41005CE90355F0EEEAD1E55D /* ClipboardContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE555DF08E6419BDACB171 /* ClipboardContentType.swift */; };
 		5B8527CB425905642F275A11 /* PicoSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5702E812E979B7740E455C4 /* PicoSettingsView.swift */; };
@@ -19,6 +21,7 @@
 		78373DDD59850C0C6F4A94E4 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0381240BCCFC99D849192FE1 /* OCRService.swift */; };
 		808D782C94E77251CFB254C4 /* ClipboardImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54265860A8A7DC661D3BD117 /* ClipboardImporter.swift */; };
 		8447D970931C837250156C54 /* TranslationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7273D1B9811346793C24E /* TranslationDirection.swift */; };
+		97AA5A3DBA89AAF2B9F819F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25217AA61BC2C1893BDDE214 /* Assets.xcassets */; };
 		9F5DFD803F116951012EB4B5 /* OpenAICompatibleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18EE7D3E77E6830BAB5B53C /* OpenAICompatibleClient.swift */; };
 		BAD8B060033626C00B99BB5A /* HistoryRetentionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45243028D13BFD35C19A4ADD /* HistoryRetentionPolicy.swift */; };
 		C033D055514A79D8A647FBA7 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 67A306E11E680F98DF9963DC /* Sparkle */; };
@@ -49,6 +52,8 @@
 /* Begin PBXFileReference section */
 		0381240BCCFC99D849192FE1 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
 		17580C5248A953C6423F414E /* PicoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		239D2DFFC5CE67D24BB4135F /* PicoSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoSettingsWindowController.swift; sourceTree = "<group>"; };
+		25217AA61BC2C1893BDDE214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CDE555DF08E6419BDACB171 /* ClipboardContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardContentType.swift; sourceTree = "<group>"; };
 		31DEFF896719633861D66AB7 /* Pico.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pico.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FEC9EF0F4BE05A1D07DA1BF /* ClipboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardRepository.swift; sourceTree = "<group>"; };
@@ -60,6 +65,7 @@
 		53D76237CD31426DBD16B00D /* TranslationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationCoordinator.swift; sourceTree = "<group>"; };
 		54265860A8A7DC661D3BD117 /* ClipboardImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardImporter.swift; sourceTree = "<group>"; };
 		59CAFE207CD27121E0E7CA4B /* PicoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoUITests.swift; sourceTree = "<group>"; };
+		5FA6C74ED342CCD1C10913E5 /* PicoPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoPanelController.swift; sourceTree = "<group>"; };
 		7B03541D39CCF84E25594F24 /* ClipboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntry.swift; sourceTree = "<group>"; };
 		83C19C609D719AB51A9F8BDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A21B4D9CE5B80F9DC887D274 /* PicoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoMainView.swift; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 		733030982C72AC618B07D6BE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				25217AA61BC2C1893BDDE214 /* Assets.xcassets */,
 				83C19C609D719AB51A9F8BDE /* Info.plist */,
 				A78B4F6BF9654A879461D5BC /* Pico.entitlements */,
 			);
@@ -174,7 +181,9 @@
 			isa = PBXGroup;
 			children = (
 				A21B4D9CE5B80F9DC887D274 /* PicoMainView.swift */,
+				5FA6C74ED342CCD1C10913E5 /* PicoPanelController.swift */,
 				A5702E812E979B7740E455C4 /* PicoSettingsView.swift */,
+				239D2DFFC5CE67D24BB4135F /* PicoSettingsWindowController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -218,6 +227,7 @@
 			buildConfigurationList = 7357D305886D426947C075A6 /* Build configuration list for PBXNativeTarget "Pico" */;
 			buildPhases = (
 				C46E12D56D2CA1AF71A171BB /* Sources */,
+				FCF8FC9B5AEC0C77A43D1372 /* Resources */,
 				966CFB682AA11E4AA3CBE2DA /* Frameworks */,
 			);
 			buildRules = (
@@ -311,6 +321,17 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		FCF8FC9B5AEC0C77A43D1372 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97AA5A3DBA89AAF2B9F819F6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C46E12D56D2CA1AF71A171BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -329,7 +350,9 @@
 				0D6A2B24BD15AC456B62BA3C /* PasteService.swift in Sources */,
 				EA7A4024A24F61890251F04D /* PicoApp.swift in Sources */,
 				1A50DB07A59AE8CD49937B88 /* PicoMainView.swift in Sources */,
+				20D383F5B9A1124B88D02AE5 /* PicoPanelController.swift in Sources */,
 				5B8527CB425905642F275A11 /* PicoSettingsView.swift in Sources */,
+				0A7977B98FC3B360CF2E81D5 /* PicoSettingsWindowController.swift in Sources */,
 				2396BD6EAA51F87497A0B986 /* TranslationCoordinator.swift in Sources */,
 				8447D970931C837250156C54 /* TranslationDirection.swift in Sources */,
 			);
