@@ -211,6 +211,7 @@ struct PicoMainView: View {
                                let destination = state.repository.groups.first(where: { $0.id == groupID }) {
                                 state.repository.add(entry, to: destination)
                             }
+                            PicoPanelController.shared.setWindowDraggingEnabled(true)
                         }
                     }
                     return true
@@ -281,7 +282,11 @@ struct PicoMainView: View {
                         )
                         .id(entry.id)
                         .onDrag {
-                            NSItemProvider(object: entry.id.uuidString as NSString)
+                            PicoPanelController.shared.setWindowDraggingEnabled(false)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                PicoPanelController.shared.setWindowDraggingEnabled(true)
+                            }
+                            return NSItemProvider(object: entry.id.uuidString as NSString)
                         }
                     }
                 }

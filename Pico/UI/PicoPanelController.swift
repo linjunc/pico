@@ -31,6 +31,10 @@ final class PicoPanelController {
 
     private init() {}
 
+    func setWindowDraggingEnabled(_ enabled: Bool) {
+        panel?.isMovableByWindowBackground = enabled
+    }
+
     private func ensurePanel(content: some View) -> PicoPanel {
         if let panel { return panel }
         let p = PicoPanel(contentRect: .zero, styleMask: [.borderless], backing: .buffered, defer: false)
@@ -42,8 +46,7 @@ final class PicoPanelController {
         p.collectionBehavior = [.moveToActiveSpace, .fullScreenAuxiliary]
         p.hidesOnDeactivate = false
         p.isMovable = true
-        // 不能让整个背景都可拖动：卡片拖拽需要进入左侧分组。
-        p.isMovableByWindowBackground = false
+        p.isMovableByWindowBackground = true
         let host = NSHostingController(rootView: content)
         host.sizingOptions = [] // 禁止 SwiftUI 内容反向撑大面板，由 setFrame 控制
         p.contentViewController = host
@@ -173,16 +176,6 @@ final class PicoPanelController {
 final class PicoPanel: NSPanel {
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { false }
-
-    override func mouseDown(with event: NSEvent) {
-        let point = contentView?.convert(event.locationInWindow, from: nil) ?? .zero
-        // 只有顶部工具栏（约 64pt）是窗口拖动区，内容卡片区域保留给拖放。
-        if let contentView, point.y >= contentView.bounds.maxY - 64 {
-            performDrag(with: event)
-        } else {
-            super.mouseDown(with: event)
-        }
-    }
 
     override init(contentRect: NSRect, styleMask: NSWindow.StyleMask, backing: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(
