@@ -194,6 +194,11 @@ final class PicoAppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         NSApp.setActivationPolicy(.accessory)
+        if let appIcon = NSImage(systemSymbolName: "p.circle.fill", accessibilityDescription: "Pico") {
+            appIcon.isTemplate = false
+            appIcon.size = NSSize(width: 512, height: 512)
+            NSApp.applicationIconImage = appIcon
+        }
         installStatusItem()
         KeyboardShortcuts.onKeyDown(for: .togglePicoPanel) { [weak self] in Task { @MainActor in self?.togglePanel() } }
         KeyboardShortcuts.onKeyDown(for: .translateClipboard) { [weak self] in Task { @MainActor in self?.translateCurrentClipboard() } }
