@@ -29,7 +29,7 @@ struct PicoSettingsView: View {
             .formStyle(.grouped)
             .frame(minWidth: 560)
         }
-        .frame(minWidth: 820, minHeight: 620)
+        .frame(minWidth: 760, minHeight: 500)
         .preferredColorScheme(.dark)
         // 注意：不要在 onAppear 里 bootstrap Sparkle —— SPUStandardUpdaterController 的
         // startingUpdater 会同步等待 XPC，在主线程上把整个 app 卡死（主队列饿死，面板全废）。

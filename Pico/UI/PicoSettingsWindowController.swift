@@ -33,7 +33,7 @@ final class PicoSettingsWindowController {
             return
         }
         let w = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 860, height: 640),
+            contentRect: NSRect(x: 0, y: 0, width: 760, height: 500),
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered,
             defer: false
@@ -41,7 +41,7 @@ final class PicoSettingsWindowController {
         w.title = "Pico 设置"
         w.level = .floating
         w.isReleasedWhenClosed = false // 复用，点红绿灯只是 orderOut
-        w.setContentSize(NSSize(width: 860, height: 640))
+        w.setContentSize(NSSize(width: 760, height: 500))
         w.center()
         w.contentView = NSHostingView(rootView:
             PicoSettingsView()

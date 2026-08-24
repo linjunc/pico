@@ -136,7 +136,7 @@ struct PicoMainView: View {
             .frame(width: 180)
             TextField("搜索历史、OCR 或来源应用", text: $state.query)
                 .textFieldStyle(.roundedBorder)
-                .frame(width: 220)
+                .frame(width: 260)
                 // 搜索完按回车：交还焦点，下一次回车直接粘贴选中条目
                 .onSubmit { NSApp.keyWindow?.makeFirstResponder(nil) }
             Button {
@@ -231,9 +231,9 @@ struct PicoMainView: View {
     private var entryGrid: some View {
         let columns: Int = {
             switch state.selectedLayout {
-            case "紧凑": return 4
+            case "紧凑": return 5
             case "纵向": return 2
-            default: return 3
+            default: return 4
             }
         }()
         return ScrollViewReader { proxy in
