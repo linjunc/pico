@@ -35,6 +35,11 @@
     .mark.fold .cut { fill:#0a0e15; }
     .mark.fold .foldline { fill:none; stroke:#b9f7ff; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
     .mark.fold .accent { fill:none; stroke:#0a5dba; stroke-width:5; stroke-linecap:round; }
+    .variant-0 .mark, .variant-1 .mark, .variant-2 .mark { stroke-width:13; filter:drop-shadow(0 0 11px #48ddff66) drop-shadow(0 12px 20px #0009); }
+    .variant-0 .mark .accent, .variant-1 .mark .accent, .variant-2 .mark .accent { stroke-width:10; }
+    .variant-0 .mark .accent { opacity:.95; }
+    .variant-1 .mark { transform:rotate(-8deg) scale(1.05); }
+    .variant-2 .mark { transform:scale(1.04); }
     .small { transform:scale(.72); }
     @media(max-width:850px){ body{padding:24px}.grid{grid-template-columns:1fr 1fr} }
     @media(max-width:580px){.grid{grid-template-columns:1fr} header{display:block}}
@@ -60,6 +65,6 @@
     '<svg class="mark" viewBox="0 0 150 150"><path d="M42 113V37h12v76m0-76h27c18 0 29 9 29 23s-11 23-29 23H54"/><path class="accent" d="M84 83h29"/></svg>',
     '<svg class="mark" viewBox="0 0 150 150"><path d="M39 101c17 0 17-52 34-52s17 52 34 52 17-52 34-52"/><path class="accent" d="M39 101c17 0 17 18 34 18s17-18 34-18"/></svg>'
   ];
-  document.querySelectorAll('.icon').forEach((node, i) => node.innerHTML = marks[i]);
+  document.querySelectorAll('.icon').forEach((node, i) => { node.classList.add('variant-' + i); node.innerHTML = marks[i]; });
 </script>
 </html>
