@@ -326,14 +326,16 @@ struct PicoMainView: View {
 private struct PicoMarkView: View {
     var body: some View {
         Canvas { context, size in
-            var left = Path()
-            left.addArc(center: CGPoint(x: size.width * 0.38, y: size.height * 0.5), radius: size.width * 0.25, startAngle: .degrees(55), endAngle: .degrees(305), clockwise: false)
-            var right = Path()
-            right.addArc(center: CGPoint(x: size.width * 0.62, y: size.height * 0.5), radius: size.width * 0.25, startAngle: .degrees(235), endAngle: .degrees(125), clockwise: true)
-            var bridge = Path(); bridge.move(to: CGPoint(x: size.width * 0.32, y: size.height * 0.5)); bridge.addLine(to: CGPoint(x: size.width * 0.68, y: size.height * 0.5))
+            let x: (CGFloat) -> CGFloat = { size.width * $0 / 150 }
+            let y: (CGFloat) -> CGFloat = { size.height * $0 / 150 }
+            var left = Path(); left.move(to: CGPoint(x: x(43), y: y(34))); left.addLine(to: CGPoint(x: x(43), y: y(115))); left.addLine(to: CGPoint(x: x(79), y: y(115)))
+            left.addCurve(to: CGPoint(x: x(116), y: y(85)), control1: CGPoint(x: x(103), y: y(115)), control2: CGPoint(x: x(116), y: y(103)))
+            left.addCurve(to: CGPoint(x: x(79), y: y(55)), control1: CGPoint(x: x(116), y: y(67)), control2: CGPoint(x: x(103), y: y(55))); left.addLine(to: CGPoint(x: x(43), y: y(55)))
+            var right = Path(); right.move(to: CGPoint(x: x(79), y: y(85))); right.addLine(to: CGPoint(x: x(118), y: y(85)))
+            right.addCurve(to: CGPoint(x: x(140), y: y(64)), control1: CGPoint(x: x(131), y: y(85)), control2: CGPoint(x: x(140), y: y(76)))
+            right.addCurve(to: CGPoint(x: x(118), y: y(43)), control1: CGPoint(x: x(140), y: y(52)), control2: CGPoint(x: x(131), y: y(43))); right.addLine(to: CGPoint(x: x(84), y: y(43)))
             context.stroke(left, with: .color(.white), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
             context.stroke(right, with: .color(.cyan), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
-            context.stroke(bridge, with: .color(.cyan), style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
         }
     }
 }
