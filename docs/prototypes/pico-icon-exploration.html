@@ -28,6 +28,8 @@
     .speed { position:absolute; z-index:3; width:190px; height:95px; border-top:7px solid #061321; border-bottom:7px solid #061321; transform:skewX(-20deg) rotate(-28deg); opacity:.9; }
     .double .pc { text-shadow:-10px 8px 0 #4388ff55, 10px -8px 0 #48ddff44; }
     .fluid .pc { transform:rotate(8deg) translateX(-4px); }
+    .mark { width:142px; height:142px; overflow:visible; fill:none; stroke:#eafcff; stroke-width:9; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 15px #48ddff44); }
+    .mark .accent { stroke:#48ddff; stroke-width:7; }
     .small { transform:scale(.72); }
     @media(max-width:850px){ body{padding:24px}.grid{grid-template-columns:1fr 1fr} }
     @media(max-width:580px){.grid{grid-template-columns:1fr} header{display:block}}
@@ -44,4 +46,15 @@
     <article class="card"><div class="stage"><div class="icon fluid"><div class="tile"></div><div class="pc">P<span>C</span></div></div></div><div class="label"><div><div class="name">06 · Fluid</div><div class="desc">更柔和、更高级的流体轮廓</div></div></div></article>
   </main>
 </body>
+<script>
+  const marks = [
+    '<svg class="mark" viewBox="0 0 150 150"><path d="M52 116V35h35c24 0 35 12 35 29s-11 29-35 29H52m35-29h25"/><path class="accent" d="M115 43c12 8 18 19 18 33 0 18-10 32-27 40"/></svg>',
+    '<svg class="mark" viewBox="0 0 150 150"><path d="M48 117V34h41c19 0 30 10 30 25 0 16-11 25-30 25H48"/><path class="accent" d="M116 54c-8-12-19-18-33-18M83 113c17 0 29-8 36-23"/></svg>',
+    '<svg class="mark" viewBox="0 0 150 150"><path d="M53 116V35h34c23 0 35 12 35 29s-12 29-35 29H53"/><path class="accent" d="M120 40a48 48 0 1 0 0 70"/></svg>',
+    '<svg class="mark" viewBox="0 0 150 150"><path d="M49 116V35h38c23 0 34 11 34 28s-11 28-34 28H49"/><path class="accent" d="M42 70h79"/></svg>',
+    '<svg class="mark" viewBox="0 0 150 150"><path d="M51 116V35h35c24 0 36 12 36 29s-12 29-36 29H51"/><path class="accent" d="M36 49h78M36 101h78"/></svg>',
+    '<svg class="mark" viewBox="0 0 150 150"><path d="M53 116V35h34c23 0 35 12 35 29s-12 29-35 29H53"/><path class="accent" d="M108 49c-8-8-17-12-28-12M108 101c-8 8-17 12-28 12"/></svg>'
+  ];
+  document.querySelectorAll('.icon').forEach((node, i) => node.innerHTML = marks[i]);
+</script>
 </html>
