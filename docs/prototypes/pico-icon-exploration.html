@@ -30,6 +30,11 @@
     .fluid .pc { transform:rotate(8deg) translateX(-4px); }
     .mark { width:142px; height:142px; overflow:visible; fill:none; stroke:#eafcff; stroke-width:9; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 15px #48ddff44); }
     .mark .accent { stroke:#48ddff; stroke-width:7; }
+    .mark.fold { stroke:none; filter:drop-shadow(0 12px 18px #0008); }
+    .mark.fold .solid { fill:url(#none); fill:#48dfff; }
+    .mark.fold .cut { fill:#0a0e15; }
+    .mark.fold .foldline { fill:none; stroke:#b9f7ff; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; opacity:.9; }
+    .mark.fold .accent { fill:none; stroke:#0a5dba; stroke-width:5; stroke-linecap:round; }
     .small { transform:scale(.72); }
     @media(max-width:850px){ body{padding:24px}.grid{grid-template-columns:1fr 1fr} }
     @media(max-width:580px){.grid{grid-template-columns:1fr} header{display:block}}
@@ -48,12 +53,12 @@
 </body>
 <script>
   const marks = [
-    '<svg class="mark" viewBox="0 0 150 150"><path d="M52 116V35h35c24 0 35 12 35 29s-11 29-35 29H52m35-29h25"/><path class="accent" d="M115 43c12 8 18 19 18 33 0 18-10 32-27 40"/></svg>',
-    '<svg class="mark" viewBox="0 0 150 150"><path d="M48 117V34h41c19 0 30 10 30 25 0 16-11 25-30 25H48"/><path class="accent" d="M116 54c-8-12-19-18-33-18M83 113c17 0 29-8 36-23"/></svg>',
-    '<svg class="mark" viewBox="0 0 150 150"><path d="M53 116V35h34c23 0 35 12 35 29s-12 29-35 29H53"/><path class="accent" d="M120 40a48 48 0 1 0 0 70"/></svg>',
-    '<svg class="mark" viewBox="0 0 150 150"><path d="M49 116V35h38c23 0 34 11 34 28s-11 28-34 28H49"/><path class="accent" d="M42 70h79"/></svg>',
-    '<svg class="mark" viewBox="0 0 150 150"><path d="M51 116V35h35c24 0 36 12 36 29s-12 29-36 29H51"/><path class="accent" d="M36 49h78M36 101h78"/></svg>',
-    '<svg class="mark" viewBox="0 0 150 150"><path d="M53 116V35h34c23 0 35 12 35 29s-12 29-35 29H53"/><path class="accent" d="M108 49c-8-8-17-12-28-12M108 101c-8 8-17 12-28 12"/></svg>'
+    '<svg class="mark fold" viewBox="0 0 150 150"><path class="solid" d="M31 24h66l22 22v80H31z"/><path class="cut" d="M53 112V48h29c19 0 29 9 29 22s-10 22-29 22H53"/><path class="foldline" d="M97 24v23h22"/></svg>',
+    '<svg class="mark fold" viewBox="0 0 150 150"><path class="solid" d="M27 34l72-13 25 25-13 72-72 13-25-25z"/><path class="cut" d="M52 112V48h28c18 0 28 9 28 21s-10 21-28 21H52"/><path class="foldline" d="M99 21l-4 27 26-2"/></svg>',
+    '<svg class="mark fold" viewBox="0 0 150 150"><path class="solid" d="M40 20h57l22 22v87H40z"/><path class="cut" d="M61 112V48h25c18 0 27 9 27 21s-9 21-27 21H61"/><path class="foldline" d="M97 20v23h22"/><path class="accent" d="M119 55v55"/></svg>',
+    '<svg class="mark fold" viewBox="0 0 150 150"><path class="solid" d="M25 42l75-20 25 25-20 75-75 20-25-25z"/><path class="cut" d="M53 113V47h28c18 0 28 9 28 22s-10 22-28 22H53"/><path class="foldline" d="M100 22l-3 27 28-2"/></svg>',
+    '<svg class="mark fold" viewBox="0 0 150 150"><path class="solid" d="M31 27h67l21 21v78H31z"/><path class="cut" d="M52 112V48h28c18 0 28 9 28 21s-10 21-28 21H52"/><path class="foldline" d="M98 27v22h21"/><path class="accent" d="M35 38h55"/></svg>',
+    '<svg class="mark fold" viewBox="0 0 150 150"><path class="solid" d="M35 25h62l20 21v80H35z"/><path class="cut" d="M57 112V48h27c18 0 28 9 28 21s-10 21-28 21H57"/><path class="foldline" d="M97 25v22h20"/><path class="accent" d="M117 57v47"/></svg>'
   ];
   document.querySelectorAll('.icon').forEach((node, i) => node.innerHTML = marks[i]);
 </script>
