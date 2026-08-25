@@ -213,17 +213,14 @@ final class PicoAppDelegate: NSObject, NSApplicationDelegate {
     private func makeBrandIcon(size: CGFloat) -> NSImage {
         let image = NSImage(size: NSSize(width: size, height: size))
         image.lockFocus()
-        let rect = NSRect(x: 1, y: 1, width: size - 2, height: size - 2)
-        NSColor.systemCyan.setFill()
-        NSBezierPath(roundedRect: rect, xRadius: size * 0.24, yRadius: size * 0.24).fill()
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.systemFont(ofSize: size * 0.62, weight: .bold),
-            .foregroundColor: NSColor(calibratedWhite: 0.03, alpha: 1),
-            .paragraphStyle: paragraph
-        ]
-        ("P" as NSString).draw(in: NSRect(x: 0, y: size * 0.13, width: size, height: size * 0.7), withAttributes: attributes)
+        let stroke = max(1.8, size * 0.075)
+        let left = NSBezierPath()
+        left.appendArc(withCenter: NSPoint(x: size * 0.38, y: size * 0.5), radius: size * 0.25, startAngle: 55, endAngle: 305, clockwise: false)
+        NSColor.white.setStroke(); left.lineWidth = stroke; left.lineCapStyle = .round; left.stroke()
+        let right = NSBezierPath()
+        right.appendArc(withCenter: NSPoint(x: size * 0.62, y: size * 0.5), radius: size * 0.25, startAngle: 235, endAngle: 125, clockwise: true)
+        NSColor.systemCyan.setStroke(); right.lineWidth = stroke; right.lineCapStyle = .round; right.stroke()
+        let bridge = NSBezierPath(); bridge.move(to: NSPoint(x: size * 0.32, y: size * 0.5)); bridge.line(to: NSPoint(x: size * 0.68, y: size * 0.5)); NSColor.systemCyan.setStroke(); bridge.lineWidth = stroke * 0.7; bridge.stroke()
         image.unlockFocus()
         return image
     }

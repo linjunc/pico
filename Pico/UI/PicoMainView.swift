@@ -127,11 +127,8 @@ struct PicoMainView: View {
     // MARK: - 头部
     private var header: some View {
         HStack(spacing: 10) {
-            Text("P")
-                .font(.system(size: 14, weight: .bold))
-                .foregroundStyle(Color.black.opacity(0.85))
-                .frame(width: 25, height: 25)
-                .background(Color.cyan, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+            PicoMarkView()
+                .frame(width: 27, height: 27)
             Text("Pico").font(.system(size: 15, weight: .semibold))
             Spacer()
             Picker("布局", selection: $state.selectedLayout) {
@@ -322,6 +319,21 @@ struct PicoMainView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+        }
+    }
+}
+
+private struct PicoMarkView: View {
+    var body: some View {
+        Canvas { context, size in
+            var left = Path()
+            left.addArc(center: CGPoint(x: size.width * 0.38, y: size.height * 0.5), radius: size.width * 0.25, startAngle: .degrees(55), endAngle: .degrees(305), clockwise: false)
+            var right = Path()
+            right.addArc(center: CGPoint(x: size.width * 0.62, y: size.height * 0.5), radius: size.width * 0.25, startAngle: .degrees(235), endAngle: .degrees(125), clockwise: true)
+            var bridge = Path(); bridge.move(to: CGPoint(x: size.width * 0.32, y: size.height * 0.5)); bridge.addLine(to: CGPoint(x: size.width * 0.68, y: size.height * 0.5))
+            context.stroke(left, with: .color(.white), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
+            context.stroke(right, with: .color(.cyan), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
+            context.stroke(bridge, with: .color(.cyan), style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
         }
     }
 }
