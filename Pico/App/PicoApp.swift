@@ -221,7 +221,7 @@ final class PicoAppDelegate: NSObject, NSApplicationDelegate {
         left.curve(to: NSPoint(x: size * 116 / 150, y: size * 85 / 150), controlPoint1: NSPoint(x: size * 103 / 150, y: size * 115 / 150), controlPoint2: NSPoint(x: size * 116 / 150, y: size * 103 / 150))
         left.curve(to: NSPoint(x: size * 79 / 150, y: size * 55 / 150), controlPoint1: NSPoint(x: size * 116 / 150, y: size * 67 / 150), controlPoint2: NSPoint(x: size * 103 / 150, y: size * 55 / 150))
         left.line(to: NSPoint(x: size * 43 / 150, y: size * 55 / 150))
-        NSColor.white.setStroke(); left.lineWidth = stroke; left.lineCapStyle = .round; left.stroke()
+        NSColor.black.setStroke(); left.lineWidth = stroke; left.lineCapStyle = .round; left.stroke()
         let right = NSBezierPath()
         right.move(to: NSPoint(x: size * 79 / 150, y: size * 85 / 150))
         right.line(to: NSPoint(x: size * 118 / 150, y: size * 85 / 150))

@@ -334,7 +334,7 @@ private struct PicoMarkView: View {
             var right = Path(); right.move(to: CGPoint(x: x(79), y: y(85))); right.addLine(to: CGPoint(x: x(118), y: y(85)))
             right.addCurve(to: CGPoint(x: x(140), y: y(64)), control1: CGPoint(x: x(131), y: y(85)), control2: CGPoint(x: x(140), y: y(76)))
             right.addCurve(to: CGPoint(x: x(118), y: y(43)), control1: CGPoint(x: x(140), y: y(52)), control2: CGPoint(x: x(131), y: y(43))); right.addLine(to: CGPoint(x: x(84), y: y(43)))
-            context.stroke(left, with: .color(.white), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
+            context.stroke(left, with: .color(.black), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
             context.stroke(right, with: .color(.cyan), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
         }
     }
